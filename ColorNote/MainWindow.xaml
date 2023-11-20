@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorNote"
+        xmlns:controls="clr-namespace:ColorNote.Controls"
+        xmlns:view="clr-namespace:ColorNote.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" FontSize="20">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
 
+        <controls:HeaderControl />
+
+        <view:NotesView Grid.Row="1"/>
+
+        <StackPanel Grid.Row="2">
+            <StatusBar>
+                <StatusBarItem>(c)</StatusBarItem>
+                <StatusBarItem>CopyRight</StatusBarItem>
+            </StatusBar>
+        </StackPanel>
     </Grid>
 </Window>
