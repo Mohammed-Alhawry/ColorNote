@@ -11,8 +11,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding Notes}"
+        
+        <ListView  ItemsSource="{Binding Notes}"
                   DisplayMemberPath="Title"/>
-        <Button Grid.Row="1" Click="ButtonAddNote_Click">Add note</Button>
+        <Button Grid.Row="1" Command="{Binding AddNoteCommand}">Add note</Button>
+        
     </Grid>
 </UserControl>

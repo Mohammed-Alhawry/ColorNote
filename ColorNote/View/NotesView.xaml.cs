@@ -22,8 +22,4 @@ public partial class NotesView : UserControl
         await _viewModel.LoadAsync();
     }
 
-    private void ButtonAddNote_Click(object sender, RoutedEventArgs e)
-    {
-        _viewModel.AddNote();
-    }
 }

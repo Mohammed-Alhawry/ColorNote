@@ -2,6 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
 
@@ -12,10 +14,13 @@ public class NotesViewModel
     private readonly INoteDataProvider _noteDataProvider;
     public ObservableCollection<NoteItemViewModel> Notes { get; } = new();
 
+    public DelegateCommand AddNoteCommand { get; }
+    
     // public NoteItemViewModel SelectedNote;
     public NotesViewModel(INoteDataProvider noteDataProvider)
     {
         _noteDataProvider = noteDataProvider;
+        AddNoteCommand = new DelegateCommand(AddNote);
     }
     
     public async Task LoadAsync()
@@ -33,11 +38,13 @@ public class NotesViewModel
         }
     }
 
-    public void AddNote()
+    private void AddNote(object parameter)
     {
         var note = new Note() { Title = "New" };
         var noteViewModel = new NoteItemViewModel(note); 
         Notes.Add(noteViewModel);
         // SelectedNote = noteViewModel;
     }
+
+    
 }
