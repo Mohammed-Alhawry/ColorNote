@@ -12,17 +12,30 @@ namespace ColorNote.ViewModel;
 public class NotesViewModel
 {
     private readonly INoteDataProvider _noteDataProvider;
+    private NoteItemViewModel _selectedNote;
     public ObservableCollection<NoteItemViewModel> Notes { get; } = new();
 
+    public NoteItemViewModel SelectedNote
+    {
+        get => _selectedNote;
+        set
+        {
+            _selectedNote = value;
+            DeleteNoteCommand.RaiseCanExecuteChanged();
+        } 
+    }
+
     public DelegateCommand AddNoteCommand { get; }
+    public DelegateCommand DeleteNoteCommand { get; }
     
-    // public NoteItemViewModel SelectedNote;
     public NotesViewModel(INoteDataProvider noteDataProvider)
     {
         _noteDataProvider = noteDataProvider;
         AddNoteCommand = new DelegateCommand(AddNote);
+        DeleteNoteCommand = new DelegateCommand(DeleteNote, CanDelete);
     }
     
+
     public async Task LoadAsync()
     {
         if (Notes.Any())
@@ -46,5 +59,17 @@ public class NotesViewModel
         // SelectedNote = noteViewModel;
     }
 
+    private void DeleteNote(object parameter)
+    {
+        if (SelectedNote is not null)
+        {
+            Notes.Remove(SelectedNote);
+            SelectedNote = null;
+        }
+    }
     
+    private bool CanDelete(object parameter)
+    {
+        return SelectedNote is not null;
+    }
 }
