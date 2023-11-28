@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <controls:HeaderControl />
+        <controls:HeaderControl  />
 
         <view:NotesView Grid.Row="1"/>
 

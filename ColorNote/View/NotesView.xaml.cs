@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using ColorNote.Data;
@@ -11,6 +12,8 @@ public partial class NotesView : UserControl
 
     public NotesView()
     {
+        var date = DateTime.Now;
+        
         InitializeComponent();
         _viewModel = new NotesViewModel(new NoteDataProvider());
         DataContext = _viewModel;

@@ -17,8 +17,25 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <ListView Grid.ColumnSpan="2" ItemsSource="{Binding Notes}"
-                  DisplayMemberPath="Title" SelectedItem="{Binding SelectedNote}"/>
-        <Button Grid.Row="1" Command="{Binding AddNoteCommand}">Add note</Button>
+                  SelectedItem="{Binding SelectedNote}">
+            
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ShowGridLines="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition ></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        
+                    <TextBlock  Text="{Binding Title}"/> 
+                    <TextBlock  Grid.Column ="1" Text="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}"/>
+                    </Grid>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Command="{Binding AddNoteCommand}" >Add note</Button>
         <Button Grid.Column="1" Grid.Row="1" Command="{Binding DeleteNoteCommand}">Delete note</Button>
     </Grid>
 </UserControl>

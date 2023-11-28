@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ColorNote"
+             xmlns:converter="clr-namespace:ColorNote.Converter"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Colors -->
+        <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
+        
+        
+        <!-- Converters -->
+        <converter:DateTimeToOnlyDateConverter 
+            x:Key="DateTimeToOnlyDateConv"/>
     </Application.Resources>
 </Application>
