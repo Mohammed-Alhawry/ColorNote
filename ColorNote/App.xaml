@@ -8,9 +8,20 @@
         <!-- Colors -->
         <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
         
-        
         <!-- Converters -->
         <converter:DateTimeToOnlyDateConverter 
             x:Key="DateTimeToOnlyDateConv"/>
+        
+        <!-- ListTemplate -->
+        
+            <DataTemplate x:Key="NoteDataTemplate">
+                <DockPanel>
+                    <TextBlock Text="{Binding Title}" />
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}"
+                               Margin="20 0 0 0" Foreground="Gray"/>
+                </DockPanel>
+            </DataTemplate>
+        
     </Application.Resources>
 </Application>

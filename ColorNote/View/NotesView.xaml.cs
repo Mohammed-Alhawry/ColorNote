@@ -12,8 +12,6 @@ public partial class NotesView : UserControl
 
     public NotesView()
     {
-        var date = DateTime.Now;
-        
         InitializeComponent();
         _viewModel = new NotesViewModel(new NoteDataProvider());
         DataContext = _viewModel;
@@ -24,5 +22,4 @@ public partial class NotesView : UserControl
     {
         await _viewModel.LoadAsync();
     }
-
 }
