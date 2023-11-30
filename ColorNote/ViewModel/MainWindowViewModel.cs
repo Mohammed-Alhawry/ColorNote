@@ -9,6 +9,7 @@ public class MainWindowViewModel : ViewModelBase
     private readonly NotesViewModel _notesViewModel;
     private ViewModelBase _selectedViewModel;
     private readonly DummyViewModel _dummyViewModel;
+
     public MainWindowViewModel(NotesViewModel notesViewModel) : this()
     {
         _notesViewModel = notesViewModel;
@@ -17,18 +18,19 @@ public class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        ChangeViewToNotesViewCommand = new DelegateCommand(ChangeViewToNotesView);
-        ChangeViewToDummyViewCommand = new DelegateCommand(ChangeViewToDummyView);
+        ChangeViewToNotesViewCommand = new DelegateCommand(ChangeViewToNotesView, CanClickViewMenuItem);
+        ChangeViewToDummyViewCommand = new DelegateCommand(ChangeViewToDummyView, CanClickDummyMenuItem);
     }
-    
+
+
     public MainWindowViewModel(DummyViewModel dummyViewModel) : this()
     {
         _dummyViewModel = dummyViewModel;
         SelectedViewModel = _dummyViewModel;
     }
 
-    public DelegateCommand ChangeViewToDummyViewCommand { get; private set; } 
-    public DelegateCommand ChangeViewToNotesViewCommand { get; private set; } 
+    public DelegateCommand ChangeViewToDummyViewCommand { get; private set; }
+    public DelegateCommand ChangeViewToNotesViewCommand { get; private set; }
 
     public ViewModelBase SelectedViewModel
     {
@@ -37,6 +39,8 @@ public class MainWindowViewModel : ViewModelBase
         {
             _selectedViewModel = value;
             RaisePropertyChanged();
+            ChangeViewToDummyViewCommand.RaiseCanExecuteChanged();
+            ChangeViewToNotesViewCommand.RaiseCanExecuteChanged();
         }
     }
 
@@ -47,33 +51,29 @@ public class MainWindowViewModel : ViewModelBase
 
     private void ChangeViewToDummyView(object? parameter)
     {
-        if(SelectedViewModel is DummyViewModel)
+        if (SelectedViewModel is DummyViewModel)
             return;
 
         SelectedViewModel = new DummyViewModel();
         SelectedViewModel.LoadAsync();
     }
-    
+
     private void ChangeViewToNotesView(object? parameter)
     {
-        if(SelectedViewModel is NotesViewModel)
+        if (SelectedViewModel is NotesViewModel)
             return;
 
         SelectedViewModel = new NotesViewModel(new NoteDataProvider());
         SelectedViewModel.LoadAsync();
-    } 
+    }
 
+    private bool CanClickDummyMenuItem(object arg)
+    {
+        return SelectedViewModel is NotesViewModel;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    private bool CanClickViewMenuItem(object arg)
+    {
+        return SelectedViewModel is DummyViewModel;
+    }
 }
