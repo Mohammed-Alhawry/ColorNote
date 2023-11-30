@@ -28,8 +28,8 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="_Notes" Click="NotesMenuItem_OnClick" />
-            <MenuItem Header="_DummyView" Click="DummyMenuItem_OnClick"/>
+            <MenuItem Header="_Notes" Command="{Binding ChangeViewToNotesViewCommand}"/>
+            <MenuItem Header="_DummyView" Command="{Binding ChangeViewToDummyViewCommand}"/>
         </Menu>
 
         <controls:HeaderControl Grid.Row="1" />

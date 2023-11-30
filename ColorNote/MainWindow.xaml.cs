@@ -33,23 +33,8 @@ namespace ColorNote
         {
             _viewModel.LoadAsync();
         }
-
-        private void NotesMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            if(_viewModel.SelectedViewModel is NotesViewModel)
-                return;
-
-            _viewModel.SelectedViewModel = new NotesViewModel(new NoteDataProvider());
-            _viewModel.LoadAsync();
-        }
-
-        private void DummyMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            if(_viewModel.SelectedViewModel is DummyViewModel)
-                return;
-
-            _viewModel.SelectedViewModel = new DummyViewModel();
-            _viewModel.LoadAsync();
-        }
+        
+        
+        
     }
 }
