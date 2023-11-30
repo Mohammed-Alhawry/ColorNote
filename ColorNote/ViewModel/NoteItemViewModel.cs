@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Accessibility;
 using ColorNote.Model;
 
@@ -21,7 +22,7 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Title = value;
-            OnPropertyChanged();
+            RaisePropertyChanged();
         }
     }
 
@@ -31,7 +32,7 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Content = value;
-            OnPropertyChanged();
+            RaisePropertyChanged();
         }
     }
 
@@ -41,7 +42,12 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Date = value;
-            OnPropertyChanged();
+            RaisePropertyChanged();
         }
+    }
+
+    public override Task LoadAsync()
+    {
+        throw new NotImplementedException();
     }
 }

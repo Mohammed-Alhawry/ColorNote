@@ -9,12 +9,12 @@ using ColorNote.Model;
 
 namespace ColorNote.ViewModel;
 
-public class NotesViewModel
+public class NotesViewModel : ViewModelBase
 {
     private readonly INoteDataProvider _noteDataProvider;
     private NoteItemViewModel _selectedNote;
-    public ObservableCollection<NoteItemViewModel> Notes { get; } = new();
 
+    public ObservableCollection<NoteItemViewModel> Notes { get; } = new();
     public NoteItemViewModel SelectedNote
     {
         get => _selectedNote;
@@ -36,7 +36,7 @@ public class NotesViewModel
     }
     
 
-    public async Task LoadAsync()
+    public override async Task LoadAsync()
     {
         if (Notes.Any())
             return;

@@ -6,20 +6,37 @@
         xmlns:local="clr-namespace:ColorNote"
         xmlns:controls="clr-namespace:ColorNote.Controls"
         xmlns:view="clr-namespace:ColorNote.View"
+        xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontSize="20">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:NotesViewModel}">
+            <view:NotesView></view:NotesView>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:DummyViewModel}">
+            <view:DummyView></view:DummyView>
+        </DataTemplate>
+        
+    </Window.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <controls:HeaderControl  />
+        <Menu>
+            <MenuItem Header="_Notes" Click="NotesMenuItem_OnClick" />
+            <MenuItem Header="_DummyView" Click="DummyMenuItem_OnClick"/>
+        </Menu>
 
-        <view:NotesView Grid.Row="1"/>
+        <controls:HeaderControl Grid.Row="1" />
 
-        <StackPanel Grid.Row="2">
+        <ContentControl Grid.Row="2" Content="{Binding SelectedViewModel}" />
+
+        <StackPanel Grid.Row="3">
             <StatusBar>
                 <StatusBarItem>(c)</StatusBarItem>
                 <StatusBarItem>CopyRight</StatusBarItem>
