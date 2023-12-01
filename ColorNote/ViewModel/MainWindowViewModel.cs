@@ -6,32 +6,33 @@ namespace ColorNote.ViewModel;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private readonly NotesViewModel _notesViewModel;
     private ViewModelBase _selectedViewModel;
-    private readonly DummyViewModel _dummyViewModel;
 
     public MainWindowViewModel(NotesViewModel notesViewModel) : this()
     {
-        _notesViewModel = notesViewModel;
+        NotesViewModel = notesViewModel;
         SelectedViewModel = notesViewModel;
+        DummyViewModel = new DummyViewModel();
     }
 
     public MainWindowViewModel()
     {
-        ChangeViewToNotesViewCommand = new DelegateCommand(ChangeViewToNotesView, CanClickViewMenuItem);
-        ChangeViewToDummyViewCommand = new DelegateCommand(ChangeViewToDummyView, CanClickDummyMenuItem);
+        SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
     }
-
 
     public MainWindowViewModel(DummyViewModel dummyViewModel) : this()
     {
-        _dummyViewModel = dummyViewModel;
-        SelectedViewModel = _dummyViewModel;
+        DummyViewModel = dummyViewModel;
+        SelectedViewModel = DummyViewModel;
+        NotesViewModel = new NotesViewModel(new NoteDataProvider());
     }
+    
+    public NotesViewModel NotesViewModel { get; }
+    public  DummyViewModel DummyViewModel { get; }
 
-    public DelegateCommand ChangeViewToDummyViewCommand { get; private set; }
-    public DelegateCommand ChangeViewToNotesViewCommand { get; private set; }
-
+    public DelegateCommand SelectViewModelCommand { get;}
+    
+    
     public ViewModelBase SelectedViewModel
     {
         get => _selectedViewModel;
@@ -39,41 +40,26 @@ public class MainWindowViewModel : ViewModelBase
         {
             _selectedViewModel = value;
             RaisePropertyChanged();
-            ChangeViewToDummyViewCommand.RaiseCanExecuteChanged();
-            ChangeViewToNotesViewCommand.RaiseCanExecuteChanged();
+            SelectViewModelCommand.RaiseCanExecuteChanged();
         }
     }
 
+    private bool CanClick(object parameter)
+    {
+        if (parameter is null || SelectedViewModel.GetType() == parameter.GetType())
+            return false;
+
+        return true;
+    }
+    
     public override async Task LoadAsync()
     {
         await SelectedViewModel.LoadAsync();
     }
 
-    private void ChangeViewToDummyView(object? parameter)
+    private async void SelectViewModel(object parameter)
     {
-        if (SelectedViewModel is DummyViewModel)
-            return;
-
-        SelectedViewModel = new DummyViewModel();
-        SelectedViewModel.LoadAsync();
-    }
-
-    private void ChangeViewToNotesView(object? parameter)
-    {
-        if (SelectedViewModel is NotesViewModel)
-            return;
-
-        SelectedViewModel = new NotesViewModel(new NoteDataProvider());
-        SelectedViewModel.LoadAsync();
-    }
-
-    private bool CanClickDummyMenuItem(object arg)
-    {
-        return SelectedViewModel is NotesViewModel;
-    }
-
-    private bool CanClickViewMenuItem(object arg)
-    {
-        return SelectedViewModel is DummyViewModel;
+        SelectedViewModel = parameter as ViewModelBase;
+        await LoadAsync();
     }
 }

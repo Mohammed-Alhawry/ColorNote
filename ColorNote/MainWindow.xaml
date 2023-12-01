@@ -28,8 +28,8 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="_Notes" Command="{Binding ChangeViewToNotesViewCommand}"/>
-            <MenuItem Header="_DummyView" Command="{Binding ChangeViewToDummyViewCommand}"/>
+            <MenuItem Header="_Notes" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding NotesViewModel}"/>
+            <MenuItem Header="_DummyView" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding DummyViewModel}"/>
         </Menu>
 
         <controls:HeaderControl Grid.Row="1" />
