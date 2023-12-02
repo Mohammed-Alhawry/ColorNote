@@ -8,25 +8,14 @@ public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase _selectedViewModel;
 
-    public MainWindowViewModel(NotesViewModel notesViewModel) : this()
+    public MainWindowViewModel(NotesViewModel notesViewModel, DummyViewModel dummyViewModel)
     {
         NotesViewModel = notesViewModel;
+        DummyViewModel = dummyViewModel;
         SelectedViewModel = notesViewModel;
-        DummyViewModel = new DummyViewModel();
-    }
-
-    public MainWindowViewModel()
-    {
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
     }
 
-    public MainWindowViewModel(DummyViewModel dummyViewModel) : this()
-    {
-        DummyViewModel = dummyViewModel;
-        SelectedViewModel = DummyViewModel;
-        NotesViewModel = new NotesViewModel(new NoteDataProvider());
-    }
-    
     public NotesViewModel NotesViewModel { get; }
     public  DummyViewModel DummyViewModel { get; }
 
@@ -40,7 +29,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             _selectedViewModel = value;
             RaisePropertyChanged();
-            SelectViewModelCommand.RaiseCanExecuteChanged();
+            SelectViewModelCommand?.RaiseCanExecuteChanged();
         }
     }
 
