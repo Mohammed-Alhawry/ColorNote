@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ColorNote"
              xmlns:converter="clr-namespace:ColorNote.Converter"
-             StartupUri="MainWindow.xaml">
+             >
     <Application.Resources>
         <!-- Colors -->
         <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
@@ -13,15 +13,6 @@
             x:Key="DateTimeToOnlyDateConv"/>
         
         <!-- ListTemplate -->
-        
-            <DataTemplate x:Key="NoteDataTemplate">
-                <DockPanel>
-                    <TextBlock Text="{Binding Title}" />
-                    <TextBlock Grid.Column="1"
-                               Text="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}"
-                               Margin="20 0 0 0" Foreground="Gray"/>
-                </DockPanel>
-            </DataTemplate>
         
     </Application.Resources>
 </Application>

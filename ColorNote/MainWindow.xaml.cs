@@ -21,10 +21,10 @@ namespace ColorNote
     {
         private MainWindowViewModel _viewModel;
         
-        public MainWindow()
+        public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new MainWindowViewModel(new NotesViewModel(new NoteDataProvider()));
+            _viewModel = viewModel;
             DataContext = _viewModel;
             Loaded += OnLoaded;
         }
