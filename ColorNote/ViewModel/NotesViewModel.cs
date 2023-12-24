@@ -6,6 +6,7 @@ using System.Windows.Input;
 using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace ColorNote.ViewModel;
 
