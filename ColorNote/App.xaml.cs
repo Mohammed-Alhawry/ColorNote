@@ -19,6 +19,7 @@ namespace ColorNote
         {
             ServiceCollection services = new();
             ConfigureServices(services);
+            
             _serviceProvider = services.BuildServiceProvider();
         }
 
@@ -29,6 +30,7 @@ namespace ColorNote
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
             services.AddTransient<DummyViewModel>();
+            services.AddSingleton<MainContext>();
             
             services.AddTransient<INoteDataProvider, NoteDataProvider>();
         }

@@ -1,18 +1,30 @@
-﻿    <Application x:Class="ColorNote.App"
+﻿<Application x:Class="ColorNote.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ColorNote"
-             xmlns:converter="clr-namespace:ColorNote.Converter"
-             >
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:converter="clr-namespace:ColorNote.Converter">
+
     <Application.Resources>
+        <!-- WPF Ui -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- <ui:ThemesDictionary/> -->
+                <!-- <ui:ControlsDictionary /> -->
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
+                    <converter:DateTimeToOnlyDateConverter
+                        x:Key="DateTimeToOnlyDateConv" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+
         <!-- Colors -->
-        <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
-        
+
         <!-- Converters -->
-        <converter:DateTimeToOnlyDateConverter 
-            x:Key="DateTimeToOnlyDateConv"/>
-        
+
         <!-- ListTemplate -->
-        
+
     </Application.Resources>
 </Application>

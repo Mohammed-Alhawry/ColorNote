@@ -6,3 +6,5 @@ riderModule.iml
 .idea
 ColorNote.sln.DotSettings.user
 notesAppDB.db
+.vs/
+ColorNote/.vscode

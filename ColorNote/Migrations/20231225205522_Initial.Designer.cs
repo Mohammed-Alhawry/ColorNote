@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ColorNote.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20231224185911_Second")]
-    partial class Second
+    [Migration("20231225205522_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
