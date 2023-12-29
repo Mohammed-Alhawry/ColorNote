@@ -53,7 +53,7 @@ public class NotesViewModel : ViewModelBase
     private void AddNote(object parameter)
     {
         var parentWindow = parameter as Window;
-        var noteFieldsWindow = new NoteFieldsWindow();
+        var noteFieldsWindow = new NoteFieldsWindow(_context);
 
         noteFieldsWindow.Owner = parentWindow;
         noteFieldsWindow.ShowDialog();
