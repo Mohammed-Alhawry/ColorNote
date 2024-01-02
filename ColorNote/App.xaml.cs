@@ -9,7 +9,7 @@ using System.Windows;
 using ColorNote.Data;
 using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
-
+using ColorNote.Expermintals_things;
 namespace ColorNote
 {
     public partial class App : Application
@@ -42,6 +42,7 @@ namespace ColorNote
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow?.Show();
+
         }
     }
 }

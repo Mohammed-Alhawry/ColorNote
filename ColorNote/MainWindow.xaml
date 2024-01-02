@@ -29,8 +29,8 @@
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="_Notes" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding NotesViewModel}"/>
-            <MenuItem Header="_DummyView" Command="{Binding SelectViewModelCommand}" CommandParameter="{Binding DummyViewModel}"/>
+            <MenuItem Header="_Notes"  CommandParameter="{Binding NotesViewModel}" Command="{Binding SelectViewModelCommand}"/>
+            <MenuItem Header="_DummyView" CommandParameter="{Binding DummyViewModel}" Command="{Binding SelectViewModelCommand}" />
         </Menu>
 
         <controls:HeaderControl Grid.Row="1" />
