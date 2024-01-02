@@ -42,7 +42,7 @@ public class NotesViewModel : ViewModelBase
         Notes = _context.Notes.Local.ToObservableCollection();
         
         AddNoteCommand = new DelegateCommand(AddNote);
-        DeleteNoteCommand = new DelegateCommand(DeleteNote, CanDelete);
+        DeleteNoteCommand = new DelegateCommand(DeleteNote);
     }
 
     public override async Task LoadAsync()
@@ -70,14 +70,17 @@ public class NotesViewModel : ViewModelBase
 
     private void DeleteNote(object parameter)
     {
-        if (SelectedNote is not null)
+
+        var id = parameter as Nullable<int>;
+
+        if (id is not null)
         {
-            _context.Notes.Remove(SelectedNote);
+            var note = _context.Notes.SingleOrDefault(x => x.Id == id);
+            ArgumentNullException.ThrowIfNull(note);
+            _context.Notes.Remove(note);
             _context.SaveChanges();
-            
-            Notes.Remove(SelectedNote);
-            SelectedNote = null;
         }
+        
     }
     
     private bool CanDelete(object parameter)

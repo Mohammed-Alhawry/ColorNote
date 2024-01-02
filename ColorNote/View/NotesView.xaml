@@ -6,37 +6,47 @@
              xmlns:local="clr-namespace:ColorNote.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
-             >
+             d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key="NoteDataTemplate">
-            <DockPanel>
-                <TextBlock Text="{Binding Title}" />
-                <TextBlock Grid.Column="1" 
-                           Text="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}"
-                           Margin="20 0 20 0" Foreground="Gray" />
-            </DockPanel>
-        </DataTemplate>
+        <!-- <DataTemplate x:Name="NoteRowDataTemplate"> -->
+        <!--      -->
+        <!-- </DataTemplate> -->
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ListView Grid.ColumnSpan="2" ItemsSource="{Binding Notes}"
-                  SelectedItem="{Binding SelectedNote}"
-                  ItemTemplate="{StaticResource NoteDataTemplate}" />
-        <Button Grid.Row="1" Command="{Binding AddNoteCommand}"
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False"
+                  ItemsSource="{Binding Notes}" ColumnWidth="*" AutoGenerateColumns="False" SelectionUnit="Cell"
+                  SelectionMode="Single" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Date"
+                                    Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button fa:Awesome.Content="Trash" Background="Red" Foreground="White" Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}"
+                                    CommandParameter="{Binding Id}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddNoteCommand}"
                 CommandParameter="{Binding RelativeSource={
-             RelativeSource AncestorType={x:Type Window}}}">Add note</Button>
-        <Button Grid.Column="1" Grid.Row="1" Command="{Binding DeleteNoteCommand}">Delete note</Button>
-        
+             RelativeSource AncestorType={x:Type Window}}}"  Content="Add note">
+
+        </Button>
     </Grid>
 </UserControl>
