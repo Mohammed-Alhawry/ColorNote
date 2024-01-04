@@ -16,10 +16,10 @@ namespace ColorNote.ViewModel;
 public class NotesViewModel : ViewModelBase
 {
     private readonly MainContext _context;
-    
+
     private Note _selectedNote;
 
-    public ObservableCollection<Note> Notes { get; } 
+    public ObservableCollection<Note> Notes { get; }
     public Note SelectedNote
     {
         get => _selectedNote;
@@ -27,12 +27,12 @@ public class NotesViewModel : ViewModelBase
         {
             _selectedNote = value;
             DeleteNoteCommand.RaiseCanExecuteChanged();
-        } 
+        }
     }
 
     public DelegateCommand AddNoteCommand { get; }
     public DelegateCommand DeleteNoteCommand { get; }
-    
+
     public NotesViewModel(INoteDataProvider noteDataProvider, MainContext context)
     {
         _context = context;
@@ -40,32 +40,23 @@ public class NotesViewModel : ViewModelBase
         
         _context.Notes.Load();
         Notes = _context.Notes.Local.ToObservableCollection();
-        
+
         AddNoteCommand = new DelegateCommand(AddNote);
         DeleteNoteCommand = new DelegateCommand(DeleteNote);
     }
 
     public override async Task LoadAsync()
     {
-     
+
     }
 
     private void AddNote(object parameter)
     {
-        var parentWindow = parameter as Window;
+        
         var noteFieldsWindow = new NoteFieldsWindow(_context);
-
-        noteFieldsWindow.Owner = parentWindow;
+        noteFieldsWindow.Owner = Application.Current.MainWindow;
         noteFieldsWindow.ShowDialog();
 
-
-
-        //var note = new Note() { Title = "New" };
-        //Notes.Add(note);
-
-        //_context.Notes.Add(note);
-        //_context.SaveChanges();
-        // SelectedNote = noteViewModel;
     }
 
     private void DeleteNote(object parameter)
@@ -80,9 +71,9 @@ public class NotesViewModel : ViewModelBase
             _context.Notes.Remove(note);
             _context.SaveChanges();
         }
-        
+
     }
-    
+
     private bool CanDelete(object parameter)
     {
         return SelectedNote is not null;

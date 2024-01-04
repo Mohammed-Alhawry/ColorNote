@@ -26,8 +26,13 @@
         <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Notes}" ColumnWidth="*" AutoGenerateColumns="False" SelectionUnit="Cell"
                   SelectionMode="Single" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Background" Value="{Binding BackgroundColor}"/>
+                </Style>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}" />
+                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}"/>
                 <DataGridTextColumn IsReadOnly="True" Header="Date"
                                     Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
                 <DataGridTemplateColumn Width="Auto">
@@ -38,15 +43,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
+                
             </DataGrid.Columns>
 
         </DataGrid>
 
-        <Button Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddNoteCommand}"
-                CommandParameter="{Binding RelativeSource={
-             RelativeSource AncestorType={x:Type Window}}}"  Content="Add note">
-
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddNoteCommand}" 
+                Content="Add note">
         </Button>
     </Grid>
 </UserControl>

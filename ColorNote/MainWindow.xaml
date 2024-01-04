@@ -9,7 +9,9 @@
         xmlns:view="clr-namespace:ColorNote.View"
         xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" FontSize="20">
+        Title="MainWindow" Height="450" Width="800" FontSize="20"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:NotesViewModel}">
             <view:NotesView></view:NotesView>
@@ -18,7 +20,7 @@
         <DataTemplate DataType="{x:Type viewModel:DummyViewModel}">
             <view:DummyView></view:DummyView>
         </DataTemplate>
-        
+
     </Window.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>

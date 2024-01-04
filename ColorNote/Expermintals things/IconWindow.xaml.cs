@@ -17,11 +17,13 @@ namespace ColorNote.Expermintals_things
     /// <summary>
     /// Interaction logic for icon.xaml
     /// </summary>
-    public partial class icon : Window
+    public partial class IconWindow : Window
     {
-        public icon()
+        public IconWindow()
         {
             InitializeComponent();
+            
+            
         }
     }
 }

@@ -6,32 +6,49 @@
         xmlns:local="clr-namespace:ColorNote.Controls"
         mc:Ignorable="d"
         Title="NoteFieldsWindow" Height="450" Width="800"
-        
+        WindowStartupLocation="CenterOwner"
         MinHeight="200"
         MinWidth="300"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        >
 
-  <Grid>
+    <Grid>
 
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="*"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="5*"></RowDefinition>
-      <RowDefinition></RowDefinition>
-    </Grid.RowDefinitions>
-    <Label>Title</Label>
-    <TextBox Grid.Row="1" Text="{Binding Title, Mode=TwoWay}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label>Background Color</Label>
+        <ComboBox x:Name="comboBox" Width="160" Height="20" Grid.Row="1" ItemsSource="{Binding Colors}"
+                  SelectedItem="{Binding ElementName=NoteFieldsWindowElement, Path=DataContext.SelectedColor, Mode=TwoWay}">
 
-    <Label Grid.Row="2">Content</Label>
-    <TextBox Grid.Row="3" Text="{Binding Content, Mode=TwoWay}" RenderTransformOrigin="0.41,-2.076" Margin="-2,2,2,40"/>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Rectangle Width="160" Height="20" Fill="{Binding}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+            
+        </ComboBox>
+        <Label Grid.Row="2">Title</Label>
+        <TextBox Grid.Row="3" Text="{Binding Title, Mode=TwoWay}" />
 
-    <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-      <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}" CommandParameter="{Binding ElementName=NoteFieldsWindowElement}" RenderTransformOrigin="-0.723,0.545" Width="203"/>
-      <Button IsCancel="True" Content="Cancel" Width="218"/>
+        <Label Grid.Row="4">Content</Label>
+        <TextBox Grid.Row="5" Text="{Binding Content, Mode=TwoWay}" RenderTransformOrigin="0.41,-2.076"
+                 Margin="-2,2,2,40" />
 
-    </StackPanel>
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
+                    CommandParameter="{Binding ElementName=NoteFieldsWindowElement}"
+                    RenderTransformOrigin="-0.723,0.545" Width="203" />
+            <Button IsCancel="True" Content="Cancel" Width="218" />
 
-  </Grid>
+        </StackPanel>
+
+    </Grid>
 </Window>

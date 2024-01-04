@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using ColorNote.Data;
 using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
-using ColorNote.Expermintals_things;
+
 namespace ColorNote
 {
     public partial class App : Application
@@ -26,6 +19,7 @@ namespace ColorNote
         private void ConfigureServices(ServiceCollection services)
         {
             services.AddTransient<MainWindow>();
+            
             
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
