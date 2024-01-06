@@ -9,8 +9,7 @@
         <!-- WPF Ui -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ui:ThemesDictionary/>-->
-                <!--<ui:ControlsDictionary />-->
+                
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
                     <converter:DateTimeToOnlyDateConverter

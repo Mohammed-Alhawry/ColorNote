@@ -8,17 +8,17 @@ public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase _selectedViewModel;
 
-    public MainWindowViewModel(NotesViewModel notesViewModel, DummyViewModel dummyViewModel, NoteFieldsWindowViewModel noteFieldsWindowViewModel)
+    public MainWindowViewModel(NotesViewModel notesViewModel, DummyViewModel dummyViewModel, AddNoteWindowViewModel AddNoteWindowViewModel)
     {
         NotesViewModel = notesViewModel;
         DummyViewModel = dummyViewModel;
         SelectedViewModel = notesViewModel;
-        NoteFieldsWindowViewModel = noteFieldsWindowViewModel;
+        AddNoteWindowViewModel = AddNoteWindowViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
     }
 
     public NotesViewModel NotesViewModel { get; }
-    public NoteFieldsWindowViewModel NoteFieldsWindowViewModel { get; }
+    public AddNoteWindowViewModel AddNoteWindowViewModel { get; }
     public  DummyViewModel DummyViewModel { get; }
 
     public DelegateCommand SelectViewModelCommand { get;}

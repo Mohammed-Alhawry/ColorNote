@@ -52,11 +52,9 @@ public class NotesViewModel : ViewModelBase
 
     private void AddNote(object parameter)
     {
-        
-        var noteFieldsWindow = new NoteFieldsWindow(_context);
-        noteFieldsWindow.Owner = Application.Current.MainWindow;
-        noteFieldsWindow.ShowDialog();
-
+        var addNoteWindow = new AddNoteWindow(_context);
+        addNoteWindow.Owner = Application.Current.MainWindow;
+        addNoteWindow.ShowDialog();
     }
 
     private void DeleteNote(object parameter)

@@ -10,20 +10,28 @@ using SQLitePCL;
 
 namespace ColorNote.ViewModel;
 
-public class NoteFieldsWindowViewModel : ViewModelBase
+public class AddNoteWindowViewModel : ViewModelBase
 {
     private readonly MainContext _context;
     public string Title { get; set; }
     
-    public string[] Colors { get; set; } = new string[] { "Green", "Blue", "Yellow", "Gold", "Black", "Brown" };
+    public string[] Colors { get; set; } = new string[] { "Green", "Blue", "Yellow", "Gold", "Black", "Brown", "White" };
     public string SelectedColor { get; set; } = "Blue";
     public string Content { get; set; }
     public DelegateCommand AddNoteInformationCommand { get; }
+    public DelegateCommand LoadedCommand { get; }
 
-    public NoteFieldsWindowViewModel(MainContext context)
+    public AddNoteWindowViewModel(MainContext context)
     {
         _context = context;
         AddNoteInformationCommand = new DelegateCommand(SaveInformation);
+        LoadedCommand = new DelegateCommand(WindowGotLoaded);
+    }
+
+    private void WindowGotLoaded(object obj)
+    {
+        var titleBox = obj as FrameworkElement;
+        titleBox?.Focus();
     }
 
     public override Task LoadAsync()

@@ -24,7 +24,7 @@ namespace ColorNote
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
             services.AddTransient<DummyViewModel>();
-            services.AddTransient<NoteFieldsWindowViewModel>();
+            services.AddTransient<AddNoteWindowViewModel>();
             services.AddSingleton<MainContext>();
             
             services.AddTransient<INoteDataProvider, NoteDataProvider>();
