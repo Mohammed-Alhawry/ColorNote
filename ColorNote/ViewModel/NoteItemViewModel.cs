@@ -22,7 +22,7 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Title = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
         }
     }
 
@@ -32,7 +32,7 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Content = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
         }
     }
 
@@ -42,7 +42,17 @@ public class NoteItemViewModel : ViewModelBase
         set
         {
             _model.Date = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
+        }
+    }
+
+    public string BackgroundColor
+    {
+        get => _model.BackgroundColor;
+        set
+        {
+            _model.BackgroundColor = value;
+            OnPropertyChanged();
         }
     }
 

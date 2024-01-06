@@ -16,6 +16,4 @@ public partial class AddNoteWindow : Window
         _AddNoteWindowViewModel = new AddNoteWindowViewModel(mainContext);
         DataContext = _AddNoteWindowViewModel;
     }
-
-    
 }

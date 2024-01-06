@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:ColorNote.Controls"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="AddNoteWindow" Height="450" Width="800"
@@ -13,6 +12,9 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
 
+    <Window.Resources>
+        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
+    </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction CommandParameter="{Binding ElementName=titleTextBox}"
@@ -33,7 +35,7 @@
         <Label>Background Color</Label>
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="400" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Colors}"
-                  SelectedItem="{Binding ElementName=AddNoteWindowElement, Path=DataContext.SelectedColor, Mode=TwoWay}">
+                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
 
 
             <ComboBox.ItemTemplate>
@@ -45,10 +47,10 @@
 
         </ComboBox>
         <Label Grid.Row="2">Title</Label>
-        <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Title, Mode=TwoWay}" />
+        <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
         <Label Grid.Row="4">Content</Label>
-        <TextBox Grid.Row="5" Text="{Binding Content, Mode=TwoWay}" />
+        <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"

@@ -30,7 +30,7 @@ public class MainWindowViewModel : ViewModelBase
         set
         {
             _selectedViewModel = value;
-            RaisePropertyChanged();
+            OnPropertyChanged();
             SelectViewModelCommand?.RaiseCanExecuteChanged();
         }
     }
