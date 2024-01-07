@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace ColorNote.Controls;
+namespace ColorNote.Windows;
 
 public partial class HeaderControl : UserControl
 {

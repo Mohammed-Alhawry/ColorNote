@@ -8,7 +8,7 @@ using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
 using System.Windows.Media;
-using ColorNote.Controls;
+using ColorNote.Windows;
 using SQLitePCL;
 
 namespace ColorNote.ViewModel;

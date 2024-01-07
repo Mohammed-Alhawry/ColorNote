@@ -7,7 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ColorNote.Command;
 using ColorNote.Data;
-using ColorNote.Controls;
+using ColorNote.Windows;
 using ColorNote.Model;
 using Microsoft.EntityFrameworkCore;
 

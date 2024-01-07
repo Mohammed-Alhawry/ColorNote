@@ -1,4 +1,4 @@
-<Window x:Name="AddNoteWindowElement" x:Class="ColorNote.Controls.AddNoteWindow"
+<Window x:Name="AddNoteWindowElement" x:Class="ColorNote.Windows.AddNoteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

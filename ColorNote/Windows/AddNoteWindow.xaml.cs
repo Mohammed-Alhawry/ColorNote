@@ -4,7 +4,7 @@ using ColorNote.Data;
 using ColorNote.View;
 using ColorNote.ViewModel;
 
-namespace ColorNote.Controls;
+namespace ColorNote.Windows;
 
 public partial class AddNoteWindow : Window
 {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorNote"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-        xmlns:controls="clr-namespace:ColorNote.Controls"
+        xmlns:controls="clr-namespace:ColorNote.Windows"
         xmlns:view="clr-namespace:ColorNote.View"
         xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
         mc:Ignorable="d"
