@@ -10,7 +10,7 @@
         <!-- WPF Ui -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                
+
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
                     <converter:DateTimeToOnlyDateConverter

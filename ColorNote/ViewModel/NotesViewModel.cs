@@ -37,7 +37,7 @@ public class NotesViewModel : ViewModelBase
     {
         _context = context;
         _context.Database.EnsureCreated();
-        
+
         _context.Notes.Load();
         Notes = _context.Notes.Local.ToObservableCollection();
 

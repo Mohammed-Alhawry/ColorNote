@@ -8,6 +8,7 @@ using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
 using System.Windows.Media;
+using ColorNote.Controls;
 using SQLitePCL;
 
 namespace ColorNote.ViewModel;
@@ -21,8 +22,7 @@ public class AddNoteWindowViewModel : ViewModelBase
     public string[] Colors { get; set; } =
         new string[] { "Green", "Blue", "Yellow", "Gold", "Black", "Brown", "White" };
 
-    
-    
+
     public DelegateCommand AddNoteInformationCommand { get; }
     public DelegateCommand LoadedCommand { get; }
 
@@ -51,12 +51,17 @@ public class AddNoteWindowViewModel : ViewModelBase
 
     private void SaveInformation(object parameter)
     {
-        Note.Title = "hi";
-        Note.Title = "";
-        var sender = parameter as Window;
-
+        var sender = parameter as AddNoteWindow;
+        sender.titleTextBox?.Focus();
+        
+        if (string.IsNullOrWhiteSpace(Note.Title))
+        {
+            Note.Title = "  ";
+            Note.Title = "";
+            return;
+        }
+        
         var isTitleEmpty = string.IsNullOrWhiteSpace(Note.Title);
-
         if (!isTitleEmpty)
         {
             _context.Notes.Add(Note);
