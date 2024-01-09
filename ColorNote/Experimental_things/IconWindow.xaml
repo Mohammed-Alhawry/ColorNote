@@ -5,12 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ColorNote.Experimental_things"
         mc:Ignorable="d"
         Title="icon" Height="450" Width="800">
     <Grid>
-        <Button  >
-            
-        </Button>
+
+        <Button
+        Grid.Row="0"
+        Margin="0,0,28,-20"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Bottom"
+        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+        Content="{materialDesign:PackIcon Kind=Plus}"/>
+
+
     </Grid>
 </Window>

@@ -31,7 +31,7 @@ namespace ColorNote
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            _viewModel.LoadAsync();
+            await _viewModel.LoadAsync();
         }
         
         

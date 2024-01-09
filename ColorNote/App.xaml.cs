@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using ColorNote.Data;
+using ColorNote.Experimental_things;
 using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +34,9 @@ namespace ColorNote
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            
+            //var iconwindow = new IconWindow();
+            //iconwindow.Show();
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow?.Show();

@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ColorNote"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converter="clr-namespace:ColorNote.Converter">
 
     <Application.Resources>
         <!-- WPF Ui -->
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.defaults.xaml"/>
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
                     <converter:DateTimeToOnlyDateConverter

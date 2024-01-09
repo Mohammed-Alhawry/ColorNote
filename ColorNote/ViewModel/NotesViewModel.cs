@@ -60,12 +60,20 @@ public class NotesViewModel : ViewModelBase
     private void DeleteNote(object parameter)
     {
 
-        var id = parameter as Nullable<int>;
+        var id = parameter as int?;
 
         if (id is not null)
         {
             var note = _context.Notes.SingleOrDefault(x => x.Id == id);
             ArgumentNullException.ThrowIfNull(note);
+
+            //var messageBoxText = "Are you shure that you want to delete this note?";
+            //var caption = "Delete Note";
+            //var messageBoxButton = MessageBoxButton.YesNo;
+            //var messageBoxIcon = MessageBoxImage.Warning;
+            //var result = MessageBox.Show(messageBoxText, caption, messageBoxButton, messageBoxIcon);
+            //if (result == MessageBoxResult.No) return;
+
             _context.Notes.Remove(note);
             _context.SaveChanges();
         }

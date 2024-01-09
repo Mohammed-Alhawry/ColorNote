@@ -8,12 +8,12 @@ public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase _selectedViewModel;
 
-    public MainWindowViewModel(NotesViewModel notesViewModel, DummyViewModel dummyViewModel, AddNoteWindowViewModel AddNoteWindowViewModel)
+    public MainWindowViewModel(NotesViewModel notesViewModel, DummyViewModel dummyViewModel, AddNoteWindowViewModel addNoteWindowViewModel)
     {
         NotesViewModel = notesViewModel;
         DummyViewModel = dummyViewModel;
         SelectedViewModel = notesViewModel;
-        AddNoteWindowViewModel = AddNoteWindowViewModel;
+        AddNoteWindowViewModel = addNoteWindowViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
     }
 

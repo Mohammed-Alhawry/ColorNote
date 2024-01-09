@@ -5,14 +5,48 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ColorNote.View"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <!-- <DataTemplate x:Name="NoteRowDataTemplate"> -->
-        <!--      -->
-        <!-- </DataTemplate> -->
+        <DataTemplate x:Key="deleteButtonWithItsDialogBox">
+            <materialDesign:DialogHost>
+                <materialDesign:DialogHost.DialogContent>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Orientation="Horizontal" Width="389">
+                            <materialDesign:PackIcon Kind="Warning" Margin="5" Height="40" Width="40" Foreground="Gold" />
+                            <TextBlock Text="Are you sure you want to delete this note" FontWeight="Bold" FontSize="17" Margin="5 15"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="130 20">
+                            <Button Margin="5" Content="Yes">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction
+                                Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}" CommandParameter="{Binding Id}" />
+                                        <i:InvokeCommandAction
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                            <Button Margin="5" Content="No" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                        </StackPanel>
+
+                    </Grid>
+                </materialDesign:DialogHost.DialogContent>
+                <Button Background="Red" Foreground="White"
+            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                    <materialDesign:PackIcon Kind="TrashCan" 
+                                  Width="Auto" Height="Auto" />
+                </Button>
+            </materialDesign:DialogHost>
+        </DataTemplate>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -23,32 +57,29 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False"
+        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" CanUserSortColumns="False" CanUserReorderColumns="False"
+                  CanUserAddRows="False"
                   ItemsSource="{Binding Notes}" ColumnWidth="*" AutoGenerateColumns="False" SelectionUnit="Cell"
                   SelectionMode="Single" SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="{Binding BackgroundColor}"/>
+                    <Setter Property="Background" Value="{Binding BackgroundColor}" />
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}" />
                 <DataGridTextColumn IsReadOnly="True" Header="Date"
                                     Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
-                <DataGridTemplateColumn Width="Auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button fa:Awesome.Content="Trash" Background="Red" Foreground="White" Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}"
-                                    CommandParameter="{Binding Id}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource deleteButtonWithItsDialogBox}">
+
                 </DataGridTemplateColumn>
-                
+
             </DataGrid.Columns>
 
         </DataGrid>
 
-        <Button HorizontalAlignment="Stretch" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddNoteCommand}" 
+        <Button HorizontalAlignment="Stretch" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2"
+                Command="{Binding AddNoteCommand}"
                 Content="Add note">
         </Button>
     </Grid>
