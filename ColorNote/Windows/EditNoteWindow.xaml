@@ -1,18 +1,18 @@
-<Window x:Name="AddNoteWindowElement" x:Class="ColorNote.Windows.AddNoteWindow"
+<Window x:Name="EditNoteWindowElement" x:Class="ColorNote.Windows.EditNoteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:ColorNote.Windows"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        
         mc:Ignorable="d"
-        Title="AddNoteWindow" Height="450" Width="800"
-        WindowStartupLocation="CenterOwner"
         MinHeight="400"
         MinWidth="400"
         SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize">
-
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Title="EditNoteWindow" Height="450" Width="800">
+        
     <Window.Resources>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
     </Window.Resources>
@@ -37,8 +37,7 @@
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="400" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Colors}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
-
-
+            
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
@@ -47,6 +46,7 @@
             </ComboBox.ItemTemplate>
 
         </ComboBox>
+        
         <Label Grid.Row="2">Title</Label>
         <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
@@ -54,11 +54,11 @@
         <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
-                    CommandParameter="{Binding ElementName=AddNoteWindowElement}"
+            <Button IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
+                    CommandParameter="{Binding ElementName=EditNoteWindowElement}"
                     Width="203" />
-            <Button IsCancel="True" Content="Cancel" Width="218" />
-
+            <Button IsCancel="True" Content="Cancel" Width="218" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=EditNoteWindowElement}"/>
         </StackPanel>
+
     </Grid>
 </Window>

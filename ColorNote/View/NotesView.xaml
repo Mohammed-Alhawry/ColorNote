@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ColorNote.View"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -22,28 +21,31 @@
 
                         <StackPanel Orientation="Horizontal" Width="389">
                             <materialDesign:PackIcon Kind="Warning" Margin="5" Height="40" Width="40" Foreground="Gold" />
-                            <TextBlock Text="Are you sure you want to delete this note" FontWeight="Bold" FontSize="17" Margin="5 15"/>
+                            <TextBlock Text="Are you sure you want to delete this note" FontWeight="Bold" FontSize="17"
+                                       Margin="5 15" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="130 20">
                             <Button Margin="5" Content="Yes">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <i:InvokeCommandAction
-                                Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}" CommandParameter="{Binding Id}" />
+                                            Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}"
+                                            CommandParameter="{Binding Id}" />
                                         <i:InvokeCommandAction
-                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                             </Button>
-                            <Button Margin="5" Content="No" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                            <Button Margin="5" Content="No"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" />
                         </StackPanel>
 
                     </Grid>
                 </materialDesign:DialogHost.DialogContent>
                 <Button Background="Red" Foreground="White"
-            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
-                    <materialDesign:PackIcon Kind="TrashCan" 
-                                  Width="Auto" Height="Auto" />
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                    <materialDesign:PackIcon Kind="TrashCan"
+                                             Width="Auto" Height="Auto" />
                 </Button>
             </materialDesign:DialogHost>
         </DataTemplate>
@@ -70,9 +72,19 @@
                 <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}" />
                 <DataGridTextColumn IsReadOnly="True" Header="Date"
                                     Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
-                <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource deleteButtonWithItsDialogBox}">
-
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Background="Blue"
+                                    Command="{Binding ElementName=dataGrid, Path=DataContext.EditNoteInformationCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
+                                <materialDesign:PackIcon Kind="Pencil" Width="Auto" Height="Auto" />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource deleteButtonWithItsDialogBox}" />
+
 
             </DataGrid.Columns>
 

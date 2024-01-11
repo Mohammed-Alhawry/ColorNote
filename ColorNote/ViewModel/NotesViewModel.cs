@@ -30,6 +30,8 @@ public class NotesViewModel : ViewModelBase
         }
     }
 
+    
+    public DelegateCommand EditNoteInformationCommand { get; }
     public DelegateCommand AddNoteCommand { get; }
     public DelegateCommand DeleteNoteCommand { get; }
 
@@ -40,7 +42,7 @@ public class NotesViewModel : ViewModelBase
 
         _context.Notes.Load();
         Notes = _context.Notes.Local.ToObservableCollection();
-
+        EditNoteInformationCommand = new DelegateCommand(EditNoteInformation);
         AddNoteCommand = new DelegateCommand(AddNote);
         DeleteNoteCommand = new DelegateCommand(DeleteNote);
     }
@@ -56,10 +58,16 @@ public class NotesViewModel : ViewModelBase
         addNoteWindow.Owner = Application.Current.MainWindow;
         addNoteWindow.ShowDialog();
     }
+    private void EditNoteInformation(object parameter)
+    {
+        var selectedNoteToEdit = parameter as Note;
+        var editWindow = new EditNoteWindow(_context, selectedNoteToEdit);
+        editWindow.Owner = Application.Current.MainWindow;
+        editWindow.ShowDialog();
+    }
 
     private void DeleteNote(object parameter)
     {
-
         var id = parameter as int?;
 
         if (id is not null)
@@ -67,7 +75,7 @@ public class NotesViewModel : ViewModelBase
             var note = _context.Notes.SingleOrDefault(x => x.Id == id);
             ArgumentNullException.ThrowIfNull(note);
 
-            //var messageBoxText = "Are you shure that you want to delete this note?";
+            //var messageBoxText = "Are you sure that you want to delete this note?";
             //var caption = "Delete Note";
             //var messageBoxButton = MessageBoxButton.YesNo;
             //var messageBoxIcon = MessageBoxImage.Warning;
