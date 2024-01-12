@@ -8,28 +8,22 @@
              >
              
     <Application.Resources>
-        <!-- WPF Ui -->
+        
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
+                <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepPurple" SecondaryColor="Lime"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.defaults.xaml"/>
                 <ResourceDictionary  Source="/Styles/DataGridStyles.xaml"/>
 
                 <ResourceDictionary>
+                    
                     <SolidColorBrush x:Key="HeaderBackgroundColorBrush" Color="Gold"></SolidColorBrush>
                     <converter:DateTimeToOnlyDateConverter
                         x:Key="DateTimeToOnlyDateConv" />
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
-
-        <!-- Colors -->
-
-        <!-- Converters -->
-
-        <!-- ListTemplate -->
 
     </Application.Resources>
 </Application>

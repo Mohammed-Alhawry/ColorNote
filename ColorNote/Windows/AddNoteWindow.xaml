@@ -4,14 +4,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        
+xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+Background="{DynamicResource MaterialDesignPaper}"
+TextElement.FontWeight="Medium"
+TextElement.FontSize="14"
+FontFamily="{materialDesign:MaterialDesignFont}"        
         mc:Ignorable="d"
-        Title="AddNoteWindow" Height="450" Width="800"
+        Title="AddNoteWindow" Height="450" Width="400"
         WindowStartupLocation="CenterOwner"
         MinHeight="400"
-        MinWidth="400"
-        SizeToContent="WidthAndHeight"
-        ResizeMode="NoResize">
+        
+        
+        
+        
+        ResizeMode="NoResize" >
 
     <Window.Resources>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
@@ -34,7 +41,7 @@
         </Grid.RowDefinitions>
 
         <Label>Background Color</Label>
-        <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="400" Height="30" Grid.Row="1"
+        <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Colors}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
 
@@ -51,14 +58,18 @@
         <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
         <Label Grid.Row="4">Content</Label>
-        <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
+        <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap" SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
+
+        <Grid Grid.Row="6" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button  IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
                     CommandParameter="{Binding ElementName=AddNoteWindowElement}"
-                    Width="203" />
-            <Button IsCancel="True" Content="Cancel" Width="218" />
-
-        </StackPanel>
+                     />
+            <Button Grid.Column="1" IsCancel="True" Content="Cancel"/>
+        </Grid>
     </Grid>
 </Window>

@@ -5,14 +5,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:ColorNote.Windows"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+Background="{DynamicResource MaterialDesignPaper}"
+TextElement.FontWeight="Medium"
+TextElement.FontSize="14"
+FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        MinHeight="400"
-        MinWidth="400"
-        SizeToContent="WidthAndHeight"
+        
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="EditNoteWindow" Height="450" Width="800">
-        
+        Title="EditNoteWindow" Height="450" Width="400">
+
     <Window.Resources>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
     </Window.Resources>
@@ -34,10 +38,10 @@
         </Grid.RowDefinitions>
 
         <Label>Background Color</Label>
-        <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="400" Height="30" Grid.Row="1"
+        <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Colors}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
-            
+
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
@@ -46,19 +50,22 @@
             </ComboBox.ItemTemplate>
 
         </ComboBox>
-        
+
         <Label Grid.Row="2">Title</Label>
         <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
         <Label Grid.Row="4">Content</Label>
         <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
-                    CommandParameter="{Binding ElementName=EditNoteWindowElement}"
-                    Width="203" />
-            <Button IsCancel="True" Content="Cancel" Width="218" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=EditNoteWindowElement}"/>
-        </StackPanel>
+        <Grid Grid.Row="6" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button  IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
+                    CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
+            <Button Grid.Column="1" IsCancel="True"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
+        </Grid>
 
     </Grid>
 </Window>

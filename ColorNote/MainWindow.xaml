@@ -4,38 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorNote"
-        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        
         xmlns:controls="clr-namespace:ColorNote.Windows"
         xmlns:view="clr-namespace:ColorNote.View"
         xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontSize="20"
         WindowStartupLocation="CenterScreen"
+
         >
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:NotesViewModel}">
-            <view:NotesView></view:NotesView>
+            <view:NotesView/>
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:DummyViewModel}">
-            <view:DummyView></view:DummyView>
+            <view:DummyView/>
         </DataTemplate>
 
     </Window.Resources>
     <Grid ShowGridLines="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Menu>
-            <MenuItem Header="_Notes"  CommandParameter="{Binding NotesViewModel}" Command="{Binding SelectViewModelCommand}"/>
+            <MenuItem  Header="_Notes"  CommandParameter="{Binding NotesViewModel}" Command="{Binding SelectViewModelCommand}"/>
             <MenuItem Header="_DummyView" CommandParameter="{Binding DummyViewModel}" Command="{Binding SelectViewModelCommand}" />
         </Menu>
 
-        <controls:HeaderControl Grid.Row="1" />
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS" FontStyle="Italic" Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Notes"/>
+
 
         <ContentControl Grid.Row="2" Content="{Binding SelectedViewModel}" />
 
