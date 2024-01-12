@@ -25,18 +25,15 @@ namespace ColorNote
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
             services.AddTransient<DummyViewModel>();
-            services.AddTransient<AddNoteWindowViewModel>();
+
             services.AddSingleton<MainContext>();
             
-            services.AddTransient<INoteDataProvider, NoteDataProvider>();
+
         }
         
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            
-            //var iconwindow = new IconWindow();
-            //iconwindow.Show();
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow?.Show();

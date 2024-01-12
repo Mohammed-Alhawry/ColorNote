@@ -35,7 +35,7 @@ public class NotesViewModel : ViewModelBase
     public DelegateCommand AddNoteCommand { get; }
     public DelegateCommand DeleteNoteCommand { get; }
 
-    public NotesViewModel(INoteDataProvider noteDataProvider, MainContext context)
+    public NotesViewModel(MainContext context)
     {
         _context = context;
         _context.Database.EnsureCreated();
@@ -75,12 +75,12 @@ public class NotesViewModel : ViewModelBase
             var note = _context.Notes.SingleOrDefault(x => x.Id == id);
             ArgumentNullException.ThrowIfNull(note);
 
-            //var messageBoxText = "Are you sure that you want to delete this note?";
-            //var caption = "Delete Note";
-            //var messageBoxButton = MessageBoxButton.YesNo;
-            //var messageBoxIcon = MessageBoxImage.Warning;
-            //var result = MessageBox.Show(messageBoxText, caption, messageBoxButton, messageBoxIcon);
-            //if (result == MessageBoxResult.No) return;
+            var messageBoxText = "Are you sure that you want to delete this note?";
+            var caption = "Delete Note";
+            var messageBoxButton = MessageBoxButton.YesNo;
+            var messageBoxIcon = MessageBoxImage.Warning;
+            var result = MessageBox.Show(messageBoxText, caption, messageBoxButton, messageBoxIcon);
+            if (result == MessageBoxResult.No) return;
 
             _context.Notes.Remove(note);
             _context.SaveChanges();
