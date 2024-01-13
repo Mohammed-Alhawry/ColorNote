@@ -4,24 +4,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-Background="{DynamicResource MaterialDesignPaper}"
-TextElement.FontWeight="Medium"
-TextElement.FontSize="14"
-FontFamily="{materialDesign:MaterialDesignFont}"        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converters="clr-namespace:ColorNote.Converter"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
         Title="AddNoteWindow" Height="450" Width="400"
         WindowStartupLocation="CenterOwner"
         MinHeight="400"
-        
-        
-        
-        
-        ResizeMode="NoResize" >
+        ResizeMode="NoResize">
 
     <Window.Resources>
-        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml" />
     </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -42,14 +39,14 @@ FontFamily="{materialDesign:MaterialDesignFont}"
 
         <Label>Background Color</Label>
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
-                  ItemsSource="{Binding Colors}"
-                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
+                  ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
+                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}}">
 
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
-                               Width="{Binding ElementName=comboBox, Path=ActualWidth}" Fill="{Binding}" />
+                               Width="{Binding ElementName=comboBox, Path=ActualWidth}" Fill="{Binding Converter={StaticResource EnumToStringConverter}}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
@@ -58,18 +55,18 @@ FontFamily="{materialDesign:MaterialDesignFont}"
         <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
         <Label Grid.Row="4">Content</Label>
-        <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap" SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
+        <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap"
+                 SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
 
-        <Grid Grid.Row="6" >
+        <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button  IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
-                    CommandParameter="{Binding ElementName=AddNoteWindowElement}"
-                     />
-            <Button Grid.Column="1" IsCancel="True" Content="Cancel"/>
+            <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
+                    CommandParameter="{Binding ElementName=AddNoteWindowElement}" />
+            <Button Grid.Column="1" IsCancel="True" Content="Cancel" />
         </Grid>
     </Grid>
 </Window>

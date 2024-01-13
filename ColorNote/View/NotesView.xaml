@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ColorNote.View"
+             xmlns:converter="clr-namespace:ColorNote.Converter"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
@@ -28,7 +29,7 @@
         </DataTemplate>
 
         <Style TargetType="DataGridRow">
-            <Setter Property="Background" Value="{Binding BackgroundColor}" />
+            <Setter Property="Background" Value="{Binding BackgroundColor, Converter={StaticResource EnumToStringConverter}}" />
         </Style>
 
     </UserControl.Resources>

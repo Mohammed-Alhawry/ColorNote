@@ -47,8 +47,8 @@
 
         <ContentControl Grid.Row="2" Content="{Binding SelectedViewModel}" />
 
-        <StackPanel Grid.Row="3">
-            <StatusBar>
+        <StackPanel Grid.Row="3" >
+            <StatusBar >
                 <StatusBarItem>(c)</StatusBarItem>
                 <StatusBarItem>CopyRight</StatusBarItem>
             </StatusBar>

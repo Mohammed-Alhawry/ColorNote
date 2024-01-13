@@ -11,6 +11,8 @@ using System.Windows.Media;
 using ColorNote.Windows;
 using SQLitePCL;
 using ColorNote.Constants;
+using Color = ColorNote.Model.Color;
+
 namespace ColorNote.ViewModel;
 
 public class AddNoteWindowViewModel : ViewModelBase
@@ -18,7 +20,7 @@ public class AddNoteWindowViewModel : ViewModelBase
     private readonly MainContext _context;
 
     public Note Note { get; set; }
-
+    
     public string[] Colors => ComboBoxConstants.Colors;
 
     public DelegateCommand AddNoteInformationCommand { get; }
@@ -33,7 +35,7 @@ public class AddNoteWindowViewModel : ViewModelBase
         WindowGotLoadedCommand = new DelegateCommand(WindowGotLoaded);
         Note = new Note()
         {
-            BackgroundColor = "Yellow",
+            BackgroundColor = Color.Yellow,
             Date = DateTime.Now
         };
     }

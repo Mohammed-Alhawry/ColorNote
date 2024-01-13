@@ -13,4 +13,10 @@ public class MainContext : DbContext
     {
         optionsBuilder.UseSqlite($"Data Source={dataBasePath}");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Note>().Property(b => b.BackgroundColor).HasConversion<string>();
+    }
 }

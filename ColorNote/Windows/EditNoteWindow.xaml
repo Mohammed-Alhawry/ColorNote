@@ -6,19 +6,19 @@
         xmlns:local="clr-namespace:ColorNote.Windows"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-Background="{DynamicResource MaterialDesignPaper}"
-TextElement.FontWeight="Medium"
-TextElement.FontSize="14"
-FontFamily="{materialDesign:MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        
+
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         Title="EditNoteWindow" Height="450" Width="400">
 
     <Window.Resources>
-        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml"/>
+        <ResourceDictionary Source="/Styles/TextBoxStyles.xaml" />
     </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -39,13 +39,13 @@ FontFamily="{materialDesign:MaterialDesignFont}"
 
         <Label>Background Color</Label>
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
-                  ItemsSource="{Binding Colors}"
-                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay}">
+                  ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
+                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}}">
 
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
-                               Width="{Binding ElementName=comboBox, Path=ActualWidth}" Fill="{Binding}" />
+                               Width="{Binding ElementName=comboBox, Path=ActualWidth}" Fill="{Binding Converter={StaticResource EnumToStringConverter}}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
@@ -57,14 +57,15 @@ FontFamily="{materialDesign:MaterialDesignFont}"
         <Label Grid.Row="4">Content</Label>
         <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
-        <Grid Grid.Row="6" >
+        <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
-                <ColumnDefinition/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button  IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
+            <Button IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
                     CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
-            <Button Grid.Column="1" IsCancel="True"  Content="Cancel" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
+            <Button Grid.Column="1" IsCancel="True" Content="Cancel" Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
         </Grid>
 
     </Grid>

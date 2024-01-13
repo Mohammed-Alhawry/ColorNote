@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Media;
+
 namespace ColorNote.Model;
 
 public class Note : ValidationChecker
@@ -7,7 +8,7 @@ public class Note : ValidationChecker
     private int _id;
     private string _title;
     private string _content;
-    private string _backgroundColor;
+    private Color _backgroundColor;
 
     public int Id
     {
@@ -16,7 +17,7 @@ public class Note : ValidationChecker
         {
             _id = value;
             OnPropertyChanged();
-        } 
+        }
     }
 
     public string Title
@@ -26,7 +27,7 @@ public class Note : ValidationChecker
         {
             _title = value;
             OnPropertyChanged();
-            if(string.IsNullOrWhiteSpace(_title))
+            if (string.IsNullOrWhiteSpace(_title))
                 AddError("Note title is required");
             else
                 ClearErrors();
@@ -45,7 +46,7 @@ public class Note : ValidationChecker
 
     public DateTime Date { get; set; } = DateTime.Now;
 
-    public string BackgroundColor
+    public Color BackgroundColor
     {
         get => _backgroundColor;
         set
@@ -54,4 +55,15 @@ public class Note : ValidationChecker
             OnPropertyChanged();
         }
     }
+}
+
+public enum Color
+{
+    Red,
+    Blue,
+    Brown,
+    Yellow,
+    Gold,
+    Black,
+    Green
 }
