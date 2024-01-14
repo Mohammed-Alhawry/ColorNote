@@ -12,10 +12,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="EditButtonTemplate">
-            <Button Background="Blue"
+            <Button Background="Blue" 
                     Command="{Binding ElementName=dataGrid, Path=DataContext.EditNoteInformationCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
-                <materialDesign:PackIcon Kind="Pencil" Width="Auto" Height="Auto" />
+                <materialDesign:PackIcon Kind="Pencil" Width="25" Height="25" />
             </Button>
         </DataTemplate>
 
@@ -24,7 +24,7 @@
                     Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}"
                     CommandParameter="{Binding Id}">
                 <materialDesign:PackIcon Kind="TrashCan"
-                                         Width="Auto" Height="Auto" />
+                                         Width="25" Height="25"/>
             </Button>
         </DataTemplate>
 
