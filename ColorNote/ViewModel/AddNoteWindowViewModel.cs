@@ -54,12 +54,12 @@ public class AddNoteWindowViewModel : ViewModelBase
     private void SaveInformation(object parameter)
     {
         var sender = parameter as AddNoteWindow;
-        sender.titleTextBox?.Focus();
         
         if (string.IsNullOrWhiteSpace(Note.Title))
         {
             Note.Title = "  ";
             Note.Title = "";
+
             return;
         }
         

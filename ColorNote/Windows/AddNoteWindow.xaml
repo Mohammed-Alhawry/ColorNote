@@ -40,7 +40,7 @@
         <Label>Background Color</Label>
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
-                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}}">
+                  SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}, UpdateSourceTrigger=PropertyChanged}">
 
 
             <ComboBox.ItemTemplate>
@@ -52,11 +52,11 @@
 
         </ComboBox>
         <Label Grid.Row="2">Title</Label>
-        <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
+        <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Label Grid.Row="4">Content</Label>
         <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap"
-                 SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
+                 SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
         <Grid Grid.Row="6">
