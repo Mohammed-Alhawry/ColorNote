@@ -3,6 +3,8 @@ using ColorNote.Data;
 using ColorNote.Experimental_things;
 using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
+using MaterialDesignThemes.Wpf;
+using System;
 
 namespace ColorNote
 {
@@ -34,7 +36,8 @@ namespace ColorNote
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+            
+            
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow?.Show();
 

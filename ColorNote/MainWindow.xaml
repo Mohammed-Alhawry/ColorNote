@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorNote"
-        
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:controls="clr-namespace:ColorNote.Windows"
         xmlns:view="clr-namespace:ColorNote.View"
         xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
@@ -37,10 +37,22 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu>
-            <MenuItem  Header="_Notes"  CommandParameter="{Binding NotesViewModel}" Command="{Binding SelectViewModelCommand}"/>
-            <MenuItem Header="_DummyView" CommandParameter="{Binding DummyViewModel}" Command="{Binding SelectViewModelCommand}" />
-        </Menu>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Menu>
+                <MenuItem  Header="_Notes"  CommandParameter="{Binding NotesViewModel}" Command="{Binding SelectViewModelCommand}"/>
+                <MenuItem Header="_DummyView" CommandParameter="{Binding DummyViewModel}" Command="{Binding SelectViewModelCommand}" />
+            </Menu>
+
+            <StackPanel  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="15 0">
+                <ToggleButton Command="{Binding SwitchThemeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
+
+                <TextBlock Text="Theme" FontSize="15" Margin="0 5"/>
+            </StackPanel>
+        </Grid>
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS" FontStyle="Italic" Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Notes"/>
 

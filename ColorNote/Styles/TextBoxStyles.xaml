@@ -10,7 +10,7 @@
                 <ControlTemplate>
                     <StackPanel>
                         <AdornedElementPlaceholder x:Name="titlePlaceholder"/>
-                        <TextBlock Foreground="Red" Text="{Binding ElementName=titlePlaceholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                        <TextBlock Margin="3 5" Foreground="Red" Text="{Binding ElementName=titlePlaceholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}"/>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>

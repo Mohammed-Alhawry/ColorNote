@@ -1,6 +1,9 @@
+using System;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using ColorNote.Command;
 using ColorNote.Data;
+using MaterialDesignThemes.Wpf;
 
 namespace ColorNote.ViewModel;
 
@@ -13,17 +16,37 @@ public class MainWindowViewModel : ViewModelBase
         NotesViewModel = notesViewModel;
         DummyViewModel = dummyViewModel;
         SelectedViewModel = notesViewModel;
-        
+
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
+
+        SwitchThemeCommand = new DelegateCommand(SwitchTheme);
+    }
+
+    private void SwitchTheme(object paremter)
+    {
+        var senderToggleButton = paremter as ToggleButton;
+
+        var palete = new PaletteHelper();
+        var theme = palete.GetTheme();
+
+        if (senderToggleButton.IsChecked.Value)
+            theme.SetBaseTheme(BaseTheme.Light);
+        else
+            theme.SetBaseTheme(BaseTheme.Dark);
+        
+        
+        palete.SetTheme(theme);
     }
 
     public NotesViewModel NotesViewModel { get; }
     public AddNoteWindowViewModel AddNoteWindowViewModel { get; }
-    public  DummyViewModel DummyViewModel { get; }
+    public DummyViewModel DummyViewModel { get; }
 
-    public DelegateCommand SelectViewModelCommand { get;}
-    
-    
+    public DelegateCommand SelectViewModelCommand { get; }
+    public DelegateCommand SwitchThemeCommand { get; }
+    public DelegateCommand SwitchThemeToDarkCommand { get; }
+
+
     public ViewModelBase SelectedViewModel
     {
         get => _selectedViewModel;
@@ -42,7 +65,7 @@ public class MainWindowViewModel : ViewModelBase
 
         return true;
     }
-    
+
     public override async Task LoadAsync()
     {
         await SelectedViewModel.LoadAsync();
