@@ -16,9 +16,14 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontSize="20"
-        WindowStartupLocation="CenterScreen"
-
+        WindowStartupLocation="CenterScreen" 
         >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClosingWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:NotesViewModel}">
             <view:NotesView/>
