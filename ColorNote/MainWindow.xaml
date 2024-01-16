@@ -9,6 +9,7 @@
         xmlns:view="clr-namespace:ColorNote.View"
         xmlns:viewModel="clr-namespace:ColorNote.ViewModel"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:themeSwitch="clr-namespace:ThemeSwitch.UI.Units;assembly=ThemeSwitch"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
@@ -52,11 +53,9 @@
                 <MenuItem Header="_DummyView" CommandParameter="{Binding DummyViewModel}" Command="{Binding SelectViewModelCommand}" />
             </Menu>
 
-            <StackPanel  Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="15 0">
-                <ToggleButton Command="{Binding SwitchThemeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"/>
 
-                <TextBlock Text="Theme" FontSize="15" Margin="0 5"/>
-            </StackPanel>
+            <themeSwitch:ThemeSwitch IsChecked="{Binding IsToggleThemeButtonChecked, Mode=TwoWay}" Command="{Binding SwitchThemeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Grid.Column="1" HorizontalAlignment="Right" Height="27" VerticalAlignment="Center"/>
+            
         </Grid>
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS" FontStyle="Italic" Style="{StaticResource MaterialDesignHeadline3TextBlock}" Text="Notes"/>

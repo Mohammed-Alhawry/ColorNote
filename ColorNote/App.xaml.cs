@@ -30,21 +30,56 @@ namespace ColorNote
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
             services.AddTransient<DummyViewModel>();
-            
+
             services.AddSingleton<MainContext>();
+            services.AddSingleton<Settings>(provider =>
+            {
+                var fileName = "Settings.json";
+                var settings = new Settings();
+                if (!File.Exists(fileName))
+                {
+                    settings.MaterialDesignInXaml = new MaterialDesignInXamlSettings();
+                    settings.MaterialDesignInXaml.Theme = "Light";
+                    settings.IsToggleThemeButtonChecked = false;
+                    JsonSerializer.Serialize<Settings>(settings);
+                    return settings;
+                }
+                else
+                {
+                    settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(fileName));
+                    return settings;
+                }
+            });
 
         }
 
+
+
+
+        //        services.AddSingleton<Settings>(provider =>
+        //            {
+        //                var fileName = "Settings.json";
+        //                var settings = new Settings();
+        //                try
+        //                {
+        //                    settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(fileName));
+        //                }
+        //                catch (Exception e)
+        //                {
+        //                    Console.WriteLine($"Error while deserializing Settings.json: {e.Message}");
+        //                }
+        //return settings;
+        //            });
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            var fileName = "Settings.json";
-            var settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(fileName));
+
             var palette = new PaletteHelper();
             var theme = palette.GetTheme();
+
             
-            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme), settings.MaterialDesignInXaml.Theme);
+            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme), _serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
             theme.SetBaseTheme(settingsTheme);
             palette.SetTheme(theme);
 
