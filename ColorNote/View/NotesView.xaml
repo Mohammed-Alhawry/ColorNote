@@ -3,16 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ColorNote.View"
-             xmlns:converter="clr-namespace:ColorNote.Converter"
+             xmlns:localization="clr-namespace:ColorNote.Localization"
+             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="EditButtonTemplate">
-            <Button Background="Blue" 
+            <Button Background="Blue"
                     Command="{Binding ElementName=dataGrid, Path=DataContext.EditNoteInformationCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
                 <materialDesign:PackIcon Kind="Pencil" Width="25" Height="25" />
@@ -24,12 +22,13 @@
                     Command="{Binding ElementName=dataGrid, Path=DataContext.DeleteNoteCommand}"
                     CommandParameter="{Binding Id}">
                 <materialDesign:PackIcon Kind="TrashCan"
-                                         Width="25" Height="25"/>
+                                         Width="25" Height="25" />
             </Button>
         </DataTemplate>
 
         <Style TargetType="DataGridRow">
-            <Setter Property="Background" Value="{Binding BackgroundColor, Converter={StaticResource EnumToStringConverter}}" />
+            <Setter Property="Background"
+                    Value="{Binding BackgroundColor, Converter={StaticResource EnumToStringConverter}}" />
         </Style>
 
     </UserControl.Resources>
@@ -42,23 +41,26 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
-        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2" 
-                  ItemsSource="{Binding Notes}" ColumnWidth="*" 
-                   SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
-            
+
+        <DataGrid x:Name="dataGrid" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding Notes}" ColumnWidth="*"
+                  SelectedItem="{Binding SelectedNote, Mode=TwoWay}">
+
             <DataGrid.Columns>
-                <DataGridTextColumn IsReadOnly="True" Header="Title" Binding="{Binding Title}" />
-                <DataGridTextColumn IsReadOnly="True" Header="Date"
+                <DataGridTextColumn IsReadOnly="True" Header="{localization:Loc Title}"
+                                    Binding="{Binding Title}" />
+                <DataGridTextColumn IsReadOnly="True" Header="{localization:Loc Date}"
                                     Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
                 <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource EditButtonTemplate}" />
                 <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource DeleteButtonTemplate}" />
             </DataGrid.Columns>
         </DataGrid>
-
-        <Button HorizontalAlignment="Stretch" FontWeight="Bold" Grid.Row="1" Grid.ColumnSpan="2"
+        
+        <Viewbox Width="120" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <Button HorizontalAlignment="Center" FontWeight="Bold" Grid.Row="1" 
                 Command="{Binding AddNoteCommand}"
-                Content="Add note">
-        </Button>
+                Content="{localization:Loc AddNote}">
+            </Button>
+        </Viewbox>
     </Grid>
 </UserControl>

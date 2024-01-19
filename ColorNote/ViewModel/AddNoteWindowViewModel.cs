@@ -1,15 +1,10 @@
 using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
-using System.Windows.Media;
 using ColorNote.Windows;
-using SQLitePCL;
 using ColorNote.Constants;
 using Color = ColorNote.Model.Color;
 

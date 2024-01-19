@@ -1,5 +1,5 @@
 using System;
-using System.Windows.Media;
+using ColorNote.Resources;
 
 namespace ColorNote.Model;
 
@@ -28,13 +28,13 @@ public class Note : ValidationChecker
             _title = value;
             OnPropertyChanged();
             if (string.IsNullOrWhiteSpace(_title))
-                AddError("Note title is required");
+                AddError($"{Strings.Note_TitleRequiredError}");
             else
                 ClearErrors();
         }
     }
-
-    public string? Content
+    
+    public string Content
     {
         get => _content;
         set

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Text.Json;
 
 namespace ColorNote.PersistentSettings;
@@ -6,6 +7,8 @@ namespace ColorNote.PersistentSettings;
 public class Settings
 {
     public MaterialDesignInXamlSettings MaterialDesignInXaml { get; set; }
+    public string ChosenCultureName { get; set; }
+    
     public bool IsToggleThemeButtonChecked { get; set; }
 }
 

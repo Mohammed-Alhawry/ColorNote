@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ColorNote.Windows"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:localization="clr-namespace:ColorNote.Localization"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
@@ -15,7 +16,7 @@
 
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="EditNoteWindow" Height="450" Width="400">
+        Title="{localization:Loc EditNoteWindow_Title}" Height="450" Width="400">
 
     <Window.Resources>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml" />
@@ -37,7 +38,7 @@
             <RowDefinition Height=".5*" />
         </Grid.RowDefinitions>
 
-        <Label>Background Color</Label>
+        <Label Content="{localization:Loc Note_BackgroundColor}"/>
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}}">
@@ -51,10 +52,10 @@
 
         </ComboBox>
 
-        <Label Grid.Row="2">Title</Label>
+        <Label Grid.Row="2" Content="{localization:Loc Note_TitleLabel}"/>
         <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay}" />
 
-        <Label Grid.Row="4">Content</Label>
+        <Label Grid.Row="4" Content="{localization:Loc Note_ContentLabel}"/>
         <TextBox Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay}" />
 
         <Grid Grid.Row="6">
@@ -62,9 +63,9 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button IsDefault="True" Content="Update" Command="{Binding UpdateNoteInformationCommand}"
+            <Button Margin="5" IsDefault="True" Content="{localization:Loc Note_Save}" Command="{Binding UpdateNoteInformationCommand}"
                     CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
-            <Button Grid.Column="1" IsCancel="True" Content="Cancel" Command="{Binding CancelCommand}"
+            <Button Margin="5" Grid.Column="1" IsCancel="True" Content="{localization:Loc Note_Cancel}" Command="{Binding CancelCommand}"
                     CommandParameter="{Binding ElementName=EditNoteWindowElement}" />
         </Grid>
 

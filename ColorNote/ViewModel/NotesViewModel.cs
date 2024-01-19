@@ -30,7 +30,7 @@ public class NotesViewModel : ViewModelBase
         }
     }
 
-    
+
     public DelegateCommand EditNoteInformationCommand { get; }
     public DelegateCommand AddNoteCommand { get; }
     public DelegateCommand DeleteNoteCommand { get; }
@@ -40,7 +40,7 @@ public class NotesViewModel : ViewModelBase
         _context = context;
         _context.Database.EnsureCreated();
         _context.Notes.Load();
-        
+
         Notes = _context.Notes.Local.ToObservableCollection();
         EditNoteInformationCommand = new DelegateCommand(EditNoteInformation);
         AddNoteCommand = new DelegateCommand(AddNote);
@@ -49,20 +49,23 @@ public class NotesViewModel : ViewModelBase
 
     public override async Task LoadAsync()
     {
-
+        await Task.CompletedTask;
     }
 
     private void AddNote(object parameter)
     {
         var addNoteWindow = new AddNoteWindow(_context);
         addNoteWindow.Owner = Application.Current.MainWindow;
+        addNoteWindow.FlowDirection = addNoteWindow.Owner.FlowDirection;
         addNoteWindow.ShowDialog();
     }
+
     private void EditNoteInformation(object parameter)
     {
         var selectedNoteToEdit = parameter as Note;
         var editWindow = new EditNoteWindow(_context, selectedNoteToEdit);
         editWindow.Owner = Application.Current.MainWindow;
+        editWindow.FlowDirection = editWindow.Owner.FlowDirection;
         editWindow.ShowDialog();
     }
 

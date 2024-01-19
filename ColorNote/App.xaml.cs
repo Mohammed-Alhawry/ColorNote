@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using ColorNote.Data;
-using ColorNote.Experimental_things;
 using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using MaterialDesignThemes.Wpf;
@@ -8,12 +7,16 @@ using System;
 using System.IO;
 using ColorNote.PersistentSettings;
 using System.Text.Json;
+using System.Globalization;
+using System.Text.Json.Serialization;
+using System.Windows.Markup;
 
 namespace ColorNote
 {
     public partial class App : Application
     {
         private readonly ServiceProvider _serviceProvider;
+
         public App()
         {
             ServiceCollection services = new();
@@ -29,7 +32,6 @@ namespace ColorNote
 
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
-            services.AddTransient<DummyViewModel>();
 
             services.AddSingleton<MainContext>();
             services.AddSingleton<Settings>(provider =>
@@ -41,7 +43,13 @@ namespace ColorNote
                     settings.MaterialDesignInXaml = new MaterialDesignInXamlSettings();
                     settings.MaterialDesignInXaml.Theme = "Light";
                     settings.IsToggleThemeButtonChecked = false;
-                    JsonSerializer.Serialize<Settings>(settings);
+                    settings.ChosenCultureName = CultureInfo.CurrentCulture.Name;
+                    JsonSerializerOptions options = new()
+                    {
+                        ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                        WriteIndented = true
+                    };
+                    JsonSerializer.Serialize<Settings>(settings, options);
                     return settings;
                 }
                 else
@@ -50,10 +58,7 @@ namespace ColorNote
                     return settings;
                 }
             });
-
         }
-
-
 
 
         //        services.AddSingleton<Settings>(provider =>
@@ -78,14 +83,18 @@ namespace ColorNote
             var palette = new PaletteHelper();
             var theme = palette.GetTheme();
 
-            
-            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme), _serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
+
+            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme),
+                _serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
             theme.SetBaseTheme(settingsTheme);
             palette.SetTheme(theme);
-
+            
+            var culture = new CultureInfo(_serviceProvider.GetService<Settings>().ChosenCultureName);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+            
             var mainWindow = _serviceProvider.GetService<MainWindow>();
             mainWindow?.Show();
-
         }
     }
 }

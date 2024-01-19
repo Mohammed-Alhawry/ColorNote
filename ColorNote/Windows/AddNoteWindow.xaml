@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:localization="clr-namespace:ColorNote.Localization"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:converters="clr-namespace:ColorNote.Converter"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -12,7 +13,7 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="AddNoteWindow" Height="450" Width="400"
+        Title="{localization:Loc AddNoteWindow_Title}" Height="450" Width="400"
         WindowStartupLocation="CenterOwner"
         MinHeight="400"
         ResizeMode="NoResize">
@@ -37,7 +38,7 @@
             <RowDefinition Height=".5*" />
         </Grid.RowDefinitions>
 
-        <Label>Background Color</Label>
+        <Label Content="{localization:Loc Note_BackgroundColor}" />
         <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}, UpdateSourceTrigger=PropertyChanged}">
@@ -46,17 +47,20 @@
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
-                               Width="{Binding ElementName=comboBox, Path=ActualWidth}" Fill="{Binding Converter={StaticResource EnumToStringConverter}}" />
+                               Width="{Binding ElementName=comboBox, Path=ActualWidth}"
+                               Fill="{Binding Converter={StaticResource EnumToStringConverter}}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
 
         </ComboBox>
-        <Label Grid.Row="2">Title</Label>
-        <TextBox x:Name="titleTextBox" Grid.Row="3" Text="{Binding Note.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="2" Content="{localization:Loc Note_TitleLabel}"/>
+        <TextBox x:Name="titleTextBox" Grid.Row="3"
+                 Text="{Binding Note.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="4">Content</Label>
+        <Label Grid.Row="4" Content="{localization:Loc Note_ContentLabel}"/>
         <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap"
-                 SpellCheck.IsEnabled="True" Grid.Row="5" Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                 SpellCheck.IsEnabled="True" Grid.Row="5"
+                 Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
         <Grid Grid.Row="6">
@@ -64,9 +68,9 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button IsDefault="True" Content="Save" Command="{Binding AddNoteInformationCommand}"
+            <Button Margin="5" IsDefault="True" Content="{localization:Loc Note_Save}" Command="{Binding AddNoteInformationCommand}"
                     CommandParameter="{Binding ElementName=AddNoteWindowElement}" />
-            <Button Grid.Column="1" IsCancel="True" Content="Cancel" />
+            <Button Margin="5" Grid.Column="1" IsCancel="True" Content="{localization:Loc Note_Cancel}" />
         </Grid>
     </Grid>
 </Window>

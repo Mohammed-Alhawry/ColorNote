@@ -13,8 +13,8 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <materialDesign:BundledTheme BaseTheme="Dark" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
-                <ResourceDictionary
-                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.defaults.xaml" />
+                
                 <ResourceDictionary Source="/Styles/DataGridStyles.xaml" />
 
                 <ResourceDictionary>
