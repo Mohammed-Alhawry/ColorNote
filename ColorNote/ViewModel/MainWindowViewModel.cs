@@ -21,7 +21,7 @@ public class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel(NotesViewModel notesViewModel, Settings settings)
     {
         _settings = settings;
-        IsToggleThemeButtonChecked = _settings.IsToggleThemeButtonChecked;
+        IsToggleThemeButtonChecked = _settings.IsToggleThemeButtonCheckedToDark;
         NotesViewModel = notesViewModel;
 
         SelectedViewModel = notesViewModel;
@@ -30,7 +30,6 @@ public class MainWindowViewModel : ViewModelBase
         SwitchThemeCommand = new DelegateCommand(SwitchTheme);
         ChangeLanguageToArabicCommand = new DelegateCommand(ChangeLanguageToArabic, CanClickArabic);
         ChangeLanguageToEnglishCommand = new DelegateCommand(ChangeLanguageToEnglish, CanClickEnglish);
-
     }
 
     public bool IsArabicChecked => !CanClickArabic(null);
@@ -56,9 +55,10 @@ public class MainWindowViewModel : ViewModelBase
     }
 
     public XmlLanguage Language => XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
+
     public FlowDirection FlowDirection => CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-                ? FlowDirection.RightToLeft
-                : FlowDirection.LeftToRight;
+        ? FlowDirection.RightToLeft
+        : FlowDirection.LeftToRight;
 
     public override async Task LoadAsync()
     {
@@ -79,7 +79,6 @@ public class MainWindowViewModel : ViewModelBase
 
     private bool CanClickArabic(object parameter)
     {
-
         return !CultureInfo.CurrentCulture.Name.StartsWith("ar");
     }
 
@@ -87,6 +86,7 @@ public class MainWindowViewModel : ViewModelBase
     {
         return !CultureInfo.CurrentCulture.Name.StartsWith("en");
     }
+
     private void ChangeLanguageToArabic(object obj)
     {
         var culture = new CultureInfo("ar");
@@ -108,8 +108,25 @@ public class MainWindowViewModel : ViewModelBase
     }
 
 
-
     private void OnClosingWindow(object obj)
+    {
+        SetChosenValuesForSettingsObject();
+        SaveUserSettingsToJsonFile("Settings.json");
+    }
+
+    private void SaveUserSettingsToJsonFile(string jsonFileName)
+    {
+        JsonSerializerOptions options = new()
+        {
+            ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            WriteIndented = true
+        };
+
+        var finalJsonString = JsonSerializer.Serialize(_settings, options);
+        File.WriteAllText(jsonFileName, finalJsonString);
+    }
+
+    private void SetChosenValuesForSettingsObject()
     {
         var palette = new PaletteHelper();
         var theme = palette.GetTheme();
@@ -117,14 +134,7 @@ public class MainWindowViewModel : ViewModelBase
 
         _settings.ChosenCultureName = CultureInfo.CurrentCulture.Name;
         _settings.MaterialDesignInXaml.Theme = finalTheme;
-        _settings.IsToggleThemeButtonChecked = IsToggleThemeButtonChecked;
-        JsonSerializerOptions options = new()
-        {
-            ReferenceHandler = ReferenceHandler.IgnoreCycles,
-            WriteIndented = true
-        };
-        var finalJsonString = JsonSerializer.Serialize(_settings, options);
-        File.WriteAllText("Settings.json", finalJsonString);
+        _settings.IsToggleThemeButtonCheckedToDark = IsToggleThemeButtonChecked;
     }
 
     private void SwitchTheme(object paremter)
@@ -149,6 +159,3 @@ public class MainWindowViewModel : ViewModelBase
         await LoadAsync();
     }
 }
-
-
-

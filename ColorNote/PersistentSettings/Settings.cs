@@ -9,7 +9,7 @@ public class Settings
     public MaterialDesignInXamlSettings MaterialDesignInXaml { get; set; }
     public string ChosenCultureName { get; set; }
     
-    public bool IsToggleThemeButtonChecked { get; set; }
+    public bool IsToggleThemeButtonCheckedToDark { get; set; }
 }
 
 public class MaterialDesignInXamlSettings

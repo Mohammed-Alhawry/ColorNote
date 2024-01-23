@@ -28,73 +28,71 @@ namespace ColorNote
         private void ConfigureServices(ServiceCollection services)
         {
             services.AddTransient<MainWindow>();
-
-
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
 
             services.AddSingleton<MainContext>();
             services.AddSingleton<Settings>(provider =>
             {
-                var fileName = "Settings.json";
-                var settings = new Settings();
-                if (!File.Exists(fileName))
-                {
-                    settings.MaterialDesignInXaml = new MaterialDesignInXamlSettings();
-                    settings.MaterialDesignInXaml.Theme = "Light";
-                    settings.IsToggleThemeButtonChecked = false;
-                    settings.ChosenCultureName = CultureInfo.CurrentCulture.Name;
-                    JsonSerializerOptions options = new()
-                    {
-                        ReferenceHandler = ReferenceHandler.IgnoreCycles,
-                        WriteIndented = true
-                    };
-                    JsonSerializer.Serialize<Settings>(settings, options);
-                    return settings;
-                }
-                else
-                {
-                    settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(fileName));
-                    return settings;
-                }
+                return GetUserSettingsObjectIfExistsOrCreate("Settings.json");
             });
         }
 
-
-        //        services.AddSingleton<Settings>(provider =>
-        //            {
-        //                var fileName = "Settings.json";
-        //                var settings = new Settings();
-        //                try
-        //                {
-        //                    settings = JsonSerializer.Deserialize<Settings>(File.ReadAllText(fileName));
-        //                }
-        //                catch (Exception e)
-        //                {
-        //                    Console.WriteLine($"Error while deserializing Settings.json: {e.Message}");
-        //                }
-        //return settings;
-        //            });
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
+            SetTheme(_serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
+            SetCultureInfo(_serviceProvider.GetService<Settings>().ChosenCultureName);
 
+
+            var mainWindow = _serviceProvider.GetService<MainWindow>();
+            mainWindow?.Show();
+        }
+
+        private void SetCultureInfo(string cultureName)
+        {
+            var culture = new CultureInfo(cultureName);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+        }
+
+        private void SetTheme(string chosenTheme)
+        {
             var palette = new PaletteHelper();
             var theme = palette.GetTheme();
 
 
-            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme),
-                _serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
+            BaseTheme settingsTheme = (BaseTheme)Enum.Parse(typeof(BaseTheme), chosenTheme);
             theme.SetBaseTheme(settingsTheme);
             palette.SetTheme(theme);
-            
-            var culture = new CultureInfo(_serviceProvider.GetService<Settings>().ChosenCultureName);
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = culture;
-            
-            var mainWindow = _serviceProvider.GetService<MainWindow>();
-            mainWindow?.Show();
+        }
+
+        private CultureInfo GetAppropriateCultureInfo()
+        {
+            if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+                return new CultureInfo("ar");
+            return new CultureInfo("en");
+        }
+
+        private Settings GetUserSettingsObjectIfExistsOrCreate(string jsonFileName)
+        {
+            if (File.Exists(jsonFileName))
+                return JsonSerializer.Deserialize<Settings>(File.ReadAllText(jsonFileName));
+
+            var userSettings = new Settings();
+            userSettings.MaterialDesignInXaml = new MaterialDesignInXamlSettings();
+            userSettings.MaterialDesignInXaml.Theme = "Dark";
+            userSettings.IsToggleThemeButtonCheckedToDark = true;
+            userSettings.ChosenCultureName = GetAppropriateCultureInfo().Name;
+            JsonSerializerOptions options = new()
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true
+            };
+
+            JsonSerializer.Serialize<Settings>(userSettings, options);
+            return userSettings;
         }
     }
 }
