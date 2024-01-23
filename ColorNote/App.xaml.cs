@@ -30,6 +30,7 @@ namespace ColorNote
             services.AddTransient<MainWindow>();
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
+            services.AddTransient<NavbarViewModel>();
 
             services.AddSingleton<MainContext>();
             services.AddSingleton<Settings>(provider =>

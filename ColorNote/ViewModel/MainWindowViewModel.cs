@@ -18,29 +18,21 @@ public class MainWindowViewModel : ViewModelBase
     private ViewModelBase _selectedViewModel;
     private Settings _settings;
 
-    public MainWindowViewModel(NotesViewModel notesViewModel, Settings settings)
+    public MainWindowViewModel(NotesViewModel notesViewModel, Settings settings, NavbarViewModel navbarViewModel)
     {
         _settings = settings;
-        IsToggleThemeButtonChecked = _settings.IsToggleThemeButtonCheckedToDark;
         NotesViewModel = notesViewModel;
-
+        NavbarViewModel = navbarViewModel;
         SelectedViewModel = notesViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
         ClosingWindowCommand = new DelegateCommand(OnClosingWindow);
-        SwitchThemeCommand = new DelegateCommand(SwitchTheme);
-        ChangeLanguageToArabicCommand = new DelegateCommand(ChangeLanguageToArabic, CanClickArabic);
-        ChangeLanguageToEnglishCommand = new DelegateCommand(ChangeLanguageToEnglish, CanClickEnglish);
     }
 
-    public bool IsArabicChecked => !CanClickArabic(null);
-    public bool IsEnglishChecked => !CanClickEnglish(null);
+    public NavbarViewModel NavbarViewModel { get; }
     public NotesViewModel NotesViewModel { get; }
     public DelegateCommand SelectViewModelCommand { get; }
-    public DelegateCommand ChangeLanguageToArabicCommand { get; }
-    public DelegateCommand ChangeLanguageToEnglishCommand { get; }
+
     public DelegateCommand ClosingWindowCommand { get; }
-    public DelegateCommand SwitchThemeCommand { get; }
-    public bool IsToggleThemeButtonChecked { get; set; }
 
 
     public ViewModelBase SelectedViewModel
@@ -54,49 +46,9 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
-    public XmlLanguage Language => XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.Name);
-
-    public FlowDirection FlowDirection => CultureInfo.CurrentCulture.TextInfo.IsRightToLeft
-        ? FlowDirection.RightToLeft
-        : FlowDirection.LeftToRight;
-
     public override async Task LoadAsync()
     {
         await SelectedViewModel.LoadAsync();
-    }
-
-    private void ChangeLanguageToEnglish(object obj)
-    {
-        var culture = new CultureInfo("en");
-        CultureInfo.CurrentCulture = culture;
-        CultureInfo.CurrentUICulture = culture;
-        TranslationSource.Instance.CurrentCulture = culture;
-        OnPropertyChanged(nameof(Language));
-        OnPropertyChanged(nameof(FlowDirection));
-        ChangeLanguageToArabicCommand.RaiseCanExecuteChanged();
-        ChangeLanguageToEnglishCommand.RaiseCanExecuteChanged();
-    }
-
-    private bool CanClickArabic(object parameter)
-    {
-        return !CultureInfo.CurrentCulture.Name.StartsWith("ar");
-    }
-
-    private bool CanClickEnglish(object parameter)
-    {
-        return !CultureInfo.CurrentCulture.Name.StartsWith("en");
-    }
-
-    private void ChangeLanguageToArabic(object obj)
-    {
-        var culture = new CultureInfo("ar");
-        CultureInfo.CurrentCulture = culture;
-        CultureInfo.CurrentUICulture = culture;
-        TranslationSource.Instance.CurrentCulture = culture;
-        OnPropertyChanged(nameof(Language));
-        OnPropertyChanged(nameof(FlowDirection));
-        ChangeLanguageToArabicCommand.RaiseCanExecuteChanged();
-        ChangeLanguageToEnglishCommand.RaiseCanExecuteChanged();
     }
 
     private bool CanClick(object parameter)
@@ -134,23 +86,7 @@ public class MainWindowViewModel : ViewModelBase
 
         _settings.ChosenCultureName = CultureInfo.CurrentCulture.Name;
         _settings.MaterialDesignInXaml.Theme = finalTheme;
-        _settings.IsToggleThemeButtonCheckedToDark = IsToggleThemeButtonChecked;
-    }
-
-    private void SwitchTheme(object paremter)
-    {
-        var senderToggleButton = paremter as ToggleButton;
-
-        var palete = new PaletteHelper();
-        var theme = palete.GetTheme();
-
-        if (theme.GetBaseTheme() == BaseTheme.Light)
-            theme.SetBaseTheme(BaseTheme.Dark);
-        else
-            theme.SetBaseTheme(BaseTheme.Light);
-
-
-        palete.SetTheme(theme);
+        _settings.IsToggleThemeButtonCheckedToDark = NavbarViewModel.IsToggleThemeButtonCheckedToDark;
     }
 
     private async void SelectViewModel(object parameter)

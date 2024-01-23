@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="ColorNote.View.NavbarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             
+             xmlns:themeSwitch="clr-namespace:ThemeSwitch.UI.Units;assembly=ThemeSwitch"
+             xmlns:localization="clr-namespace:ColorNote.Localization"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Menu>
+            <MenuItem Header="{localization:Loc Main_MenuItem_Language}">
+                <MenuItem Header="{localization:Loc Main_MenuItem_Arabic}"
+                          Command="{Binding ChangeLanguageToArabicCommand}"
+                          IsChecked="{Binding IsArabicChecked, Mode=OneWay}"
+                          IsCheckable="True" />
+                <MenuItem Header="{localization:Loc Main_MenuItem_English}"
+                          Command="{Binding ChangeLanguageToEnglishCommand}"
+                          IsChecked="{Binding IsEnglishChecked, Mode=OneWay}" IsCheckable="True" />
+            </MenuItem>
+
+        </Menu>
+
+        <Canvas>
+            <themeSwitch:ThemeSwitch Canvas.Right="-25" Canvas.Top="10"
+                                     IsChecked="{Binding IsToggleThemeButtonCheckedToDark, Mode=TwoWay}"
+                                     Command="{Binding SwitchThemeCommand}"
+                                     CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+                                     HorizontalAlignment="Right" Height="27" VerticalAlignment="Center" />
+        </Canvas>
+
+    </Grid>
+</UserControl>
