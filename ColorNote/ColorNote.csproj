@@ -30,6 +30,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Properties\UserSettings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>UserSettings.settings</DependentUpon>
+      </Compile>
       <Compile Update="Resources\Strings.Designer.cs">
         <DesignTime>True</DesignTime>
         <AutoGen>True</AutoGen>
@@ -45,6 +50,13 @@
         <Generator>PublicResXFileCodeGenerator</Generator>
         <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\UserSettings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+      </None>
     </ItemGroup>
 
     <ItemGroup>

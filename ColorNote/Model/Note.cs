@@ -1,14 +1,16 @@
 using System;
+using System.ComponentModel;
 using ColorNote.Resources;
 
 namespace ColorNote.Model;
 
-public class Note : ValidationChecker
+public class Note : ValidationChecker, IEditableObject
 {
     private int _id;
     private string _title;
     private string _content;
     private Color _backgroundColor;
+    private Note _tempValues;
 
     public int Id
     {
@@ -33,7 +35,7 @@ public class Note : ValidationChecker
                 ClearErrors();
         }
     }
-    
+
     public string Content
     {
         get => _content;
@@ -54,6 +56,28 @@ public class Note : ValidationChecker
             _backgroundColor = value;
             OnPropertyChanged();
         }
+    }
+
+    public void BeginEdit()
+    {
+        _tempValues = new Note();
+        _tempValues.Id = Id;
+        _tempValues.BackgroundColor = BackgroundColor;
+        _tempValues.Title = Title;
+        _tempValues.Content = Content;
+    }
+
+    public void CancelEdit()
+    {
+        Id = _tempValues.Id;
+        BackgroundColor = _tempValues.BackgroundColor;
+        Title = _tempValues.Title;
+        Content = _tempValues.Content;
+    }
+
+    public void EndEdit()
+    {
+        _tempValues = null;
     }
 }
 

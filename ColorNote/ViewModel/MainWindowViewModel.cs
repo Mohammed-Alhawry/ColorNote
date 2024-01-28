@@ -10,6 +10,7 @@ using ColorNote.Command;
 using ColorNote.Localization;
 using ColorNote.PersistentSettings;
 using MaterialDesignThemes.Wpf;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ColorNote.ViewModel;
 
@@ -26,6 +27,7 @@ public class MainWindowViewModel : ViewModelBase
         SelectedViewModel = notesViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
         ClosingWindowCommand = new DelegateCommand(OnClosingWindow);
+        var hi = (App)Application.Current;
     }
 
     public NavbarViewModel NavbarViewModel { get; }
@@ -33,7 +35,8 @@ public class MainWindowViewModel : ViewModelBase
     public DelegateCommand SelectViewModelCommand { get; }
 
     public DelegateCommand ClosingWindowCommand { get; }
-
+    
+    
 
     public ViewModelBase SelectedViewModel
     {
@@ -43,6 +46,7 @@ public class MainWindowViewModel : ViewModelBase
             _selectedViewModel = value;
             OnPropertyChanged();
             SelectViewModelCommand?.RaiseCanExecuteChanged();
+            
         }
     }
 

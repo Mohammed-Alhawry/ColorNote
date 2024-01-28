@@ -5,7 +5,6 @@ using ColorNote.Command;
 using ColorNote.Data;
 using ColorNote.Model;
 using ColorNote.Windows;
-using ColorNote.Constants;
 using Color = ColorNote.Model.Color;
 
 namespace ColorNote.ViewModel;
@@ -16,8 +15,6 @@ public class AddNoteWindowViewModel : ViewModelBase
 
     public Note Note { get; set; }
     
-    public string[] Colors => ComboBoxConstants.Colors;
-
     public DelegateCommand AddNoteInformationCommand { get; }
     
     public DelegateCommand WindowGotLoadedCommand { get; }
