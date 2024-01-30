@@ -4,11 +4,9 @@ using ColorNote.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using MaterialDesignThemes.Wpf;
 using System;
-using System.IO;
-using ColorNote.PersistentSettings;
-using System.Text.Json;
 using System.Globalization;
-using System.Text.Json.Serialization;
+
+//using ColorNote.Properties;
 
 namespace ColorNote
 {
@@ -34,18 +32,15 @@ namespace ColorNote
             services.AddTransient<NavbarViewModel>();
 
             services.AddSingleton<MainContext>();
-            services.AddSingleton<Settings>(provider =>
-            {
-                return GetUserSettingsObjectIfExistsOrCreate("Settings.json");
-            });
         }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            if (ColorNote.Properties.Settings.Default.CultureName.Equals("None"))
+                ColorNote.Properties.Settings.Default.CultureName = CultureInfo.CurrentCulture.Name;
 
-            SetTheme(_serviceProvider.GetService<Settings>().MaterialDesignInXaml.Theme);
-            SetCultureInfo(_serviceProvider.GetService<Settings>().ChosenCultureName);
+            SetTheme(ColorNote.Properties.Settings.Default.Theme);
+            SetCultureInfo(ColorNote.Properties.Settings.Default.CultureName);
 
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
@@ -69,35 +64,6 @@ namespace ColorNote
             palette.SetTheme(theme);
         }
 
-        private CultureInfo GetAppropriateCultureInfo()
-        {
-            if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
-                return new CultureInfo("ar");
-            return new CultureInfo("en");
-        }
-
-        private Settings GetUserSettingsObjectIfExistsOrCreate(string jsonFileName)
-        {
-            if (File.Exists(jsonFileName))
-                return JsonSerializer.Deserialize<Settings>(File.ReadAllText(jsonFileName));
-
-            var userSettings = new Settings
-            {
-                MaterialDesignInXaml = new MaterialDesignInXamlSettings
-                {
-                    Theme = "Dark"
-                },
-                IsToggleThemeButtonCheckedToDark = true,
-                ChosenCultureName = GetAppropriateCultureInfo().Name
-            };
-            JsonSerializerOptions options = new()
-            {
-                ReferenceHandler = ReferenceHandler.IgnoreCycles,
-                WriteIndented = true
-            };
-
-            JsonSerializer.Serialize<Settings>(userSettings, options);
-            return userSettings;
-        }
+        
     }
 }

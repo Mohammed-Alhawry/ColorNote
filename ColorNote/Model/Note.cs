@@ -89,5 +89,7 @@ public enum Color
     Yellow,
     Gold,
     Black,
-    Green
+    Green,
+    Purple,
+    Pink
 }

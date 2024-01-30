@@ -10,7 +10,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="EditButtonTemplate">
-            <Button Background="Blue"
+            <Button Background="Blue" 
                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.EditNoteInformationCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
                 <materialDesign:PackIcon Kind="Pencil" Width="25" Height="25" />
@@ -18,7 +18,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="DeleteButtonTemplate">
-            <Button Background="Red" Foreground="White"
+            <Button Background="Red" Foreground="White" 
                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DeleteNoteCommand}"
                     CommandParameter="{Binding Id}">
                 <materialDesign:PackIcon Kind="TrashCan"
@@ -51,8 +51,9 @@
                                     Binding="{Binding Title}" />
                 <DataGridTextColumn IsReadOnly="True" Header="{localization:Loc Date}"
                                     Binding="{Binding Date, Converter={StaticResource DateTimeToOnlyDateConv}}" />
-                <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource EditButtonTemplate}" />
-                <DataGridTemplateColumn Width="Auto" CellTemplate="{StaticResource DeleteButtonTemplate}" />
+                <DataGridTemplateColumn Width="100" CellTemplate="{StaticResource EditButtonTemplate}" />
+                <DataGridTemplateColumn  Width="100" CellTemplate="{StaticResource DeleteButtonTemplate}" />
+                
             </DataGrid.Columns>
         </DataGrid>
 

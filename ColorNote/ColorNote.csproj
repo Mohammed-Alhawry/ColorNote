@@ -5,6 +5,8 @@
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
         <TargetFramework>net8.0-windows7.0</TargetFramework>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+<DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,10 +32,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Properties\UserSettings.Designer.cs">
+      <Compile Update="Properties\Settings.Designer.cs">
         <DesignTimeSharedInput>True</DesignTimeSharedInput>
         <AutoGen>True</AutoGen>
-        <DependentUpon>UserSettings.settings</DependentUpon>
+        <DependentUpon>Settings.settings</DependentUpon>
       </Compile>
       <Compile Update="Resources\Strings.Designer.cs">
         <DesignTime>True</DesignTime>
@@ -53,11 +55,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Properties\UserSettings.settings">
+      <None Update="Properties\Settings.settings">
         <Generator>SettingsSingleFileGenerator</Generator>
-        <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       </None>
     </ItemGroup>
+
+
 
     <ItemGroup>
       <Page Update="Windows\AddNoteWindow.xaml">

@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
@@ -5,17 +6,15 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Markup;
 using ColorNote.Command;
 using ColorNote.Localization;
-using ColorNote.PersistentSettings;
 using MaterialDesignThemes.Wpf;
 
 namespace ColorNote.ViewModel;
 
 public class NavbarViewModel : ViewModelBase
 {
-    public NavbarViewModel(Settings settings)
+    public NavbarViewModel()
     {
-        IsToggleThemeButtonCheckedToDark = settings.IsToggleThemeButtonCheckedToDark;
-
+        IsToggleThemeButtonCheckedToDark = Properties.Settings.Default.Theme.Equals("Dark");
         SwitchThemeCommand = new DelegateCommand(SwitchTheme);
         ChangeLanguageToArabicCommand = new DelegateCommand(ChangeLanguageToArabic, CanClickArabic);
         ChangeLanguageToEnglishCommand = new DelegateCommand(ChangeLanguageToEnglish, CanClickEnglish);
@@ -43,6 +42,7 @@ public class NavbarViewModel : ViewModelBase
         OnPropertyChanged(nameof(FlowDirection));
         ChangeLanguageToArabicCommand.RaiseCanExecuteChanged();
         ChangeLanguageToEnglishCommand.RaiseCanExecuteChanged();
+        ColorNote.Properties.Settings.Default.CultureName = CultureInfo.CurrentCulture.Name;
     }
 
     private bool CanClickArabic(object parameter)
@@ -63,6 +63,7 @@ public class NavbarViewModel : ViewModelBase
         OnPropertyChanged(nameof(FlowDirection));
         ChangeLanguageToArabicCommand.RaiseCanExecuteChanged();
         ChangeLanguageToEnglishCommand.RaiseCanExecuteChanged();
+        ColorNote.Properties.Settings.Default.CultureName = CultureInfo.CurrentCulture.Name;
     }
 
     private void SetCulture(string cultureName)
@@ -86,6 +87,7 @@ public class NavbarViewModel : ViewModelBase
 
 
         palete.SetTheme(theme);
+        ColorNote.Properties.Settings.Default.Theme = theme.GetBaseTheme().ToString();
     }
 
     public override Task LoadAsync()

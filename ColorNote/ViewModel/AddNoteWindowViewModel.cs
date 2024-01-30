@@ -27,7 +27,7 @@ public class AddNoteWindowViewModel : ViewModelBase
         WindowGotLoadedCommand = new DelegateCommand(WindowGotLoaded);
         Note = new Note()
         {
-            BackgroundColor = Color.Yellow,
+            BackgroundColor = Color.Gold,
             Date = DateTime.Now
         };
     }

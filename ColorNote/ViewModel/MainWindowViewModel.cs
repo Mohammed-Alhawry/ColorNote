@@ -4,24 +4,19 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls.Primitives;
-using System.Windows.Markup;
 using ColorNote.Command;
-using ColorNote.Localization;
-using ColorNote.PersistentSettings;
 using MaterialDesignThemes.Wpf;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ColorNote.ViewModel;
 
 public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase _selectedViewModel;
-    private Settings _settings;
+    
 
-    public MainWindowViewModel(NotesViewModel notesViewModel, Settings settings, NavbarViewModel navbarViewModel)
+    public MainWindowViewModel(NotesViewModel notesViewModel, NavbarViewModel navbarViewModel)
     {
-        _settings = settings;
+        
         NotesViewModel = notesViewModel;
         NavbarViewModel = navbarViewModel;
         SelectedViewModel = notesViewModel;
@@ -66,33 +61,10 @@ public class MainWindowViewModel : ViewModelBase
 
     private void OnClosingWindow(object obj)
     {
-        SetChosenValuesForSettingsObject();
-        SaveUserSettingsToJsonFile("Settings.json");
+        Properties.Settings.Default.Save();
     }
 
-    private void SaveUserSettingsToJsonFile(string jsonFileName)
-    {
-        JsonSerializerOptions options = new()
-        {
-            ReferenceHandler = ReferenceHandler.IgnoreCycles,
-            WriteIndented = true
-        };
-
-        var finalJsonString = JsonSerializer.Serialize(_settings, options);
-        File.WriteAllText(jsonFileName, finalJsonString);
-    }
-
-    private void SetChosenValuesForSettingsObject()
-    {
-        var palette = new PaletteHelper();
-        var theme = palette.GetTheme();
-        var finalTheme = theme.GetBaseTheme().ToString();
-
-        _settings.ChosenCultureName = CultureInfo.CurrentCulture.Name;
-        _settings.MaterialDesignInXaml.Theme = finalTheme;
-        _settings.IsToggleThemeButtonCheckedToDark = NavbarViewModel.IsToggleThemeButtonCheckedToDark;
-    }
-
+    
     private async void SelectViewModel(object parameter)
     {
         SelectedViewModel = parameter as ViewModelBase;
