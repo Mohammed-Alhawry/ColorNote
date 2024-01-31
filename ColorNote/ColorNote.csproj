@@ -5,8 +5,8 @@
         <Nullable>disable</Nullable>
         <UseWPF>true</UseWPF>
         <TargetFramework>net8.0-windows7.0</TargetFramework>
+        <DebugType>embedded</DebugType>
         <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-<DebugType>embedded</DebugType>
     </PropertyGroup>
 
     <ItemGroup>
