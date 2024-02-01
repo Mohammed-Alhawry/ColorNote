@@ -7,10 +7,14 @@
         <TargetFramework>net8.0-windows7.0</TargetFramework>
         <DebugType>embedded</DebugType>
         <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+        <ApplicationIcon>Images\Icons\colornote 1.ico</ApplicationIcon>
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Images\1.jpg" />
+      <None Remove="Images\Icons\notepad_12098670.png" />
+      <None Remove="Images\Icons\note_4371099.png" />
+      <None Remove="Images\Icons\office-supplies_2891512.png" />
+      <None Remove="Images\Icons\sticky-note_9373778.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -74,6 +78,29 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <None Remove="Images\Icons\office-supplies_2891512.ico" />
+      <Resource Include="Images\Icons\office-supplies_2891512.ico" />
+      <None Remove="Images\Icons\image.ico" />
+      <None Remove="Images\Icons\image (1).ico" />
+      <None Remove="Images\Icons\colornote 1.ico" />
+      <None Remove="Images\Icons\colornote 1 (1).ico" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <Resource Include="Images\Icons\image (1).ico" />
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <Resource Include="Images\Icons\colornote 1.ico" />
     </ItemGroup>
 
 </Project>
