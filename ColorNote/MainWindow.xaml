@@ -20,7 +20,8 @@
         Title="{localization:Loc Main_Window_Title}" Height="450" Width="800" FontSize="20"
         WindowStartupLocation="CenterScreen"
         Language="{Binding NavbarViewModel.Language, UpdateSourceTrigger=PropertyChanged}"
-        FlowDirection="{Binding NavbarViewModel.FlowDirection, UpdateSourceTrigger=PropertyChanged}">
+        FlowDirection="{Binding NavbarViewModel.FlowDirection, UpdateSourceTrigger=PropertyChanged}"
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding ClosingWindowCommand}" />

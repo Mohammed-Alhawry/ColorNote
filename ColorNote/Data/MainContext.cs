@@ -8,7 +8,7 @@ public class MainContext : DbContext
 {
     public DbSet<Note> Notes { get; set; }
 
-    private string dataBasePath = Path.Combine(Directory.GetCurrentDirectory(), "notesAppDB.db");
+    private string dataBasePath = Path.Combine(Directory.GetCurrentDirectory(), "ColorNoteDB.db");
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite($"Data Source={dataBasePath}");
