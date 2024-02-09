@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
         <Nullable>disable</Nullable>
@@ -7,84 +6,93 @@
         <TargetFramework>net8.0-windows7.0</TargetFramework>
         <DebugType>embedded</DebugType>
         <ApplicationIcon>Images\Icons\notepad_25496.ico</ApplicationIcon>
-        
-
     </PropertyGroup>
 
     <ItemGroup>
-      <None Remove="Images\1.jpg" />
+        <None Remove="Images\Icons\notepad_12098670.png"/>
+        <None Remove="Images\Icons\note_4371099.png"/>
+        <None Remove="Images\Icons\office-supplies_2891512.png"/>
+        <None Remove="Images\Icons\sticky-note_9373778.png"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MaterialDesignColors" Version="3.0.0-ci498" />
-      <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci484" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
-      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
-      <PackageReference Include="ThemeSwitch" Version="1.0.0.8" />
-      <PackageReference Include="WPF-UI" Version="2.1.0" />
+        <PackageReference Include="MaterialDesignColors" Version="3.0.0-ci498"/>
+        <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci484"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77"/>
+        <PackageReference Include="ThemeSwitch" Version="1.0.0.8"/>
+        <PackageReference Include="WPF-UI" Version="2.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Properties\Settings.Designer.cs">
-        <DesignTimeSharedInput>True</DesignTimeSharedInput>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Settings.settings</DependentUpon>
-      </Compile>
-      <Compile Update="Resources\Strings.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Strings.resx</DependentUpon>
-      </Compile>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+        <Compile Update="Resources\Strings.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Strings.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\Strings.ar.resx">
-        <Generator></Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\Strings.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Strings.ar.resx">
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\Strings.resx">
+            <Generator>PublicResXFileCodeGenerator</Generator>
+            <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="Properties\Settings.settings">
-        <Generator>SettingsSingleFileGenerator</Generator>
-        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-      </None>
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
     </ItemGroup>
 
 
-
     <ItemGroup>
-      <Page Update="Windows\AddNoteWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-      <Page Update="View\NavbarView.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
+        <Page Update="Windows\AddNoteWindow.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
+        <Page Update="View\NavbarView.xaml">
+            <Generator>MSBuild:Compile</Generator>
+            <XamlRuntime>Wpf</XamlRuntime>
+            <SubType>Designer</SubType>
+        </Page>
     </ItemGroup>
 
 
+    <ItemGroup>
+
+        <None Remove="Images\Icons\notepad_bloc_notes_15548.ico"/>
+        <Resource Include="Images\Icons\notepad_bloc_notes_15548.ico"/>
+        <None Remove="Images\Icons\notepad_25496.ico"/>
+        <Resource Include="Images\Icons\notepad_25496.ico"/>
+    </ItemGroup>
+
 
     <ItemGroup>
-      <None Remove="Images\Icons\notepad_bloc_notes_15548.ico" />
-      <Resource Include="Images\Icons\notepad_bloc_notes_15548.ico" />
-      <None Remove="Images\Icons\notepad_25496.ico" />
-      <Resource Include="Images\Icons\notepad_25496.ico" />
+        <Resource Include="Images\Icons\image (1).ico"/>
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <Resource Include="Images\Icons\colornote 1.ico"/>
     </ItemGroup>
 
 </Project>
