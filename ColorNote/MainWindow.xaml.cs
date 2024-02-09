@@ -19,8 +19,7 @@ namespace ColorNote
         {
             await _viewModel.LoadAsync();
         }
-        
-        
+
         
     }
 }

@@ -1,1 +1,1 @@
-a windows desktop application for making notes written in wpf
+a windows desktop application written in WPF for making notes 

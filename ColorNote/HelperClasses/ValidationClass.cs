@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace ColorNote;
+namespace ColorNote.HelperClasses;
 
 public class ValidationChecker : PropertiesChangesNotifier, INotifyDataErrorInfo
 {

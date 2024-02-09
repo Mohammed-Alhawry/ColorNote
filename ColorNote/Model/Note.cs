@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using ColorNote.HelperClasses;
 using ColorNote.Resources;
 
 namespace ColorNote.Model;

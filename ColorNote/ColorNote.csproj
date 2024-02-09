@@ -6,6 +6,8 @@
         <UseWPF>true</UseWPF>
         <TargetFramework>net8.0-windows7.0</TargetFramework>
         <DebugType>embedded</DebugType>
+        <ApplicationIcon>Images\Icons\notepad_25496.ico</ApplicationIcon>
+        
 
     </PropertyGroup>
 
@@ -74,6 +76,15 @@
         <XamlRuntime>Wpf</XamlRuntime>
         <SubType>Designer</SubType>
       </Page>
+    </ItemGroup>
+
+
+
+    <ItemGroup>
+      <None Remove="Images\Icons\notepad_bloc_notes_15548.ico" />
+      <Resource Include="Images\Icons\notepad_bloc_notes_15548.ico" />
+      <None Remove="Images\Icons\notepad_25496.ico" />
+      <Resource Include="Images\Icons\notepad_25496.ico" />
     </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ColorNote;
+namespace ColorNote.HelperClasses;
 
 public class PropertiesChangesNotifier : INotifyPropertyChanged
 {
