@@ -6,31 +6,37 @@
         <TargetFramework>net8.0-windows7.0</TargetFramework>
         <DebugType>embedded</DebugType>
         <ApplicationIcon>Images\Icons\notepad_25496.ico</ApplicationIcon>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<Platforms>AnyCPU;x64</Platforms>
+		<PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
-
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
+    
     <ItemGroup>
-        <None Remove="Images\Icons\notepad_12098670.png"/>
-        <None Remove="Images\Icons\note_4371099.png"/>
-        <None Remove="Images\Icons\office-supplies_2891512.png"/>
-        <None Remove="Images\Icons\sticky-note_9373778.png"/>
+        <None Remove="Images\Icons\notepad_12098670.png" />
+        <None Remove="Images\Icons\note_4371099.png" />
+        <None Remove="Images\Icons\office-supplies_2891512.png" />
+        <None Remove="Images\Icons\sticky-note_9373778.png" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MaterialDesignColors" Version="3.0.0-ci498"/>
-        <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci484"/>
+        <PackageReference Include="MaterialDesignColors" Version="3.0.0-ci498" />
+        <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci484" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77"/>
-        <PackageReference Include="ThemeSwitch" Version="1.0.0.8"/>
-        <PackageReference Include="WPF-UI" Version="2.1.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+        <PackageReference Include="ThemeSwitch" Version="1.0.0.8" />
+        <PackageReference Include="WPF-UI" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -48,10 +54,12 @@
 
     <ItemGroup>
         <EmbeddedResource Update="Resources\Strings.ar.resx">
+          <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </EmbeddedResource>
         <EmbeddedResource Update="Resources\Strings.resx">
             <Generator>PublicResXFileCodeGenerator</Generator>
             <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </EmbeddedResource>
     </ItemGroup>
 
@@ -78,21 +86,8 @@
 
 
     <ItemGroup>
-
-        <None Remove="Images\Icons\notepad_bloc_notes_15548.ico"/>
-        <Resource Include="Images\Icons\notepad_bloc_notes_15548.ico"/>
-        <None Remove="Images\Icons\notepad_25496.ico"/>
-        <Resource Include="Images\Icons\notepad_25496.ico"/>
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <Resource Include="Images\Icons\image (1).ico"/>
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <Resource Include="Images\Icons\colornote 1.ico"/>
+        <None Remove="Images\Icons\notepad_25496.ico" />
+        <Resource Include="Images\Icons\notepad_25496.ico" />
     </ItemGroup>
 
 </Project>

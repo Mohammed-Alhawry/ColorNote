@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Threading;
+using System.Windows.Controls;
 
 namespace ColorNote.View
 {
@@ -10,6 +11,14 @@ namespace ColorNote.View
         public NavbarView()
         {
             InitializeComponent();
+        }
+
+        
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            
+            
+            Thread.Sleep(250);
         }
     }
 }

@@ -35,16 +35,25 @@ namespace ColorNote
         }
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
-            if (ColorNote.Properties.Settings.Default.CultureName.Equals("None"))
-                ColorNote.Properties.Settings.Default.CultureName = CultureInfo.CurrentCulture.Name;
+            try
+            {
 
-            SetTheme(ColorNote.Properties.Settings.Default.Theme);
-            SetCultureInfo(ColorNote.Properties.Settings.Default.CultureName);
+                base.OnStartup(e);
+                if (ColorNote.Properties.Settings.Default.CultureName.Equals("None"))
+                    ColorNote.Properties.Settings.Default.CultureName = CultureInfo.CurrentCulture.Name;
+
+                SetTheme(ColorNote.Properties.Settings.Default.Theme);
+                SetCultureInfo(ColorNote.Properties.Settings.Default.CultureName);
 
 
-            var mainWindow = _serviceProvider.GetService<MainWindow>();
-            mainWindow?.Show();
+                var mainWindow = _serviceProvider.GetService<MainWindow>();
+                mainWindow?.Show();
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong, try contacting the application developer to fix the issue", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
         }
 
         private void SetCultureInfo(string cultureName)

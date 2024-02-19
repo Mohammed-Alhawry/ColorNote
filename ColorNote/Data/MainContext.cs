@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using ColorNote.Model;
 using Microsoft.EntityFrameworkCore;
@@ -8,10 +9,15 @@ public class MainContext : DbContext
 {
     public DbSet<Note> Notes { get; set; }
 
-    private string dataBasePath = Path.Combine(Directory.GetCurrentDirectory(), "ColorNoteDB.db");
+    public string DataBasePath { get; set; }
+    public MainContext()
+    {
+        var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        DataBasePath = Path.Join(path, "ColorNoteDB.db");
+    }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite($"Data Source={dataBasePath}");
+        optionsBuilder.UseSqlite($"Data Source={DataBasePath}");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
