@@ -11,6 +11,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
+        
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
@@ -21,6 +22,9 @@
         WindowStartupLocation="CenterScreen"
         Language="{Binding NavbarViewModel.Language, UpdateSourceTrigger=PropertyChanged}"
         FlowDirection="{Binding NavbarViewModel.FlowDirection, UpdateSourceTrigger=PropertyChanged}"
+        Deactivated="Window_Deactivated"
+        Activated="Window_Activated"
+        
         >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">

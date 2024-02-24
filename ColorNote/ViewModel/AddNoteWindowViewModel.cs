@@ -18,19 +18,23 @@ public class AddNoteWindowViewModel : ViewModelBase
     public DelegateCommand AddNoteInformationCommand { get; }
     
     public DelegateCommand WindowGotLoadedCommand { get; }
+    
 
     public AddNoteWindowViewModel(MainContext context)
     {
         _context = context;
         AddNoteInformationCommand = new DelegateCommand(SaveInformation);
-        
+    
         WindowGotLoadedCommand = new DelegateCommand(WindowGotLoaded);
         Note = new Note()
         {
             BackgroundColor = Color.Gold,
             Date = DateTime.Now
         };
+        
     }
+    
+    
 
     private void WindowGotLoaded(object obj)
     {
@@ -61,6 +65,7 @@ public class AddNoteWindowViewModel : ViewModelBase
             _context.Notes.Add(Note);
             _context.SaveChanges();
             sender.Close();
+            
         }
     }
 }

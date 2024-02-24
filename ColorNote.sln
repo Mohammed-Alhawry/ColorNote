@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExperimentalThingsUsingCons
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExperimentalThingsUsingWPF", "ExperimentalThingsUsingWPF\ExperimentalThingsUsingWPF.csproj", "{DC85770E-6F20-48D7-8D68-A35FAF398902}"
 EndProject
-Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "ColorNoteSetup", "ColorNoteSetup\ColorNoteSetup.aiproj", "{37795CE3-2102-41A5-BC15-1187CC92B91D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,18 +55,6 @@ Global
 		{DC85770E-6F20-48D7-8D68-A35FAF398902}.Release|Any CPU.Build.0 = Release|x64
 		{DC85770E-6F20-48D7-8D68-A35FAF398902}.Release|x64.ActiveCfg = Release|x64
 		{DC85770E-6F20-48D7-8D68-A35FAF398902}.Release|x64.Build.0 = Release|x64
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Debug|Any CPU.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Debug|Any CPU.Build.0 = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Debug|x64.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Debug|x64.Build.0 = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.DefaultBuild|Any CPU.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.DefaultBuild|Any CPU.Build.0 = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.DefaultBuild|x64.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.DefaultBuild|x64.Build.0 = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Release|Any CPU.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Release|Any CPU.Build.0 = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Release|x64.ActiveCfg = DefaultBuild
-		{37795CE3-2102-41A5-BC15-1187CC92B91D}.Release|x64.Build.0 = DefaultBuild
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

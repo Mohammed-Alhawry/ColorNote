@@ -50,12 +50,13 @@ public class NotesViewModel : ViewModelBase
         await Task.CompletedTask;
     }
 
-    private  void AddNote(object parameter)
+    private void AddNote(object parameter)
     {
-            var addNoteWindow = new AddNoteWindow(_context);
-            addNoteWindow.Owner = Application.Current.MainWindow;
-            addNoteWindow.FlowDirection = addNoteWindow.Owner.FlowDirection;
-            addNoteWindow.ShowDialog();
+        var addNoteWindow = new AddNoteWindow(_context);
+        addNoteWindow.Owner = Application.Current.MainWindow;
+        
+        addNoteWindow.FlowDirection = addNoteWindow.Owner.FlowDirection;
+        addNoteWindow.ShowDialog();
     }
 
     private void EditNoteInformation(object parameter)

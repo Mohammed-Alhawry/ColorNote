@@ -7,7 +7,7 @@
         xmlns:localization="clr-namespace:ColorNote.Localization"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignPaper}"
+        Background="Transparent" AllowsTransparency="True"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
@@ -15,7 +15,9 @@
         Title="{localization:Loc AddNoteWindow_Title}" Height="450" Width="400"
         WindowStartupLocation="CenterOwner"
         MinHeight="400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+         WindowStyle="None"
+         >
 
     <Window.Resources>
         <ResourceDictionary Source="/Styles/TextBoxStyles.xaml" />
@@ -26,50 +28,53 @@
                                    Command="{Binding WindowGotLoadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height=".5*" />
-        </Grid.RowDefinitions>
+    <Border  CornerRadius="5" Background="{DynamicResource MaterialDesignPaper}">
 
-        <Label Content="{localization:Loc Note_BackgroundColor}" />
-        <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height=".5*" />
+            </Grid.RowDefinitions>
+
+            <Label Content="{localization:Loc Note_BackgroundColor}" />
+            <ComboBox HorizontalAlignment="Left" x:Name="comboBox" Width="Auto" Height="30" Grid.Row="1"
                   ItemsSource="{Binding Source={StaticResource colorEnumValues}}"
                   SelectedItem="{Binding Note.BackgroundColor, Mode=TwoWay, Converter={StaticResource EnumToStringConverter}, UpdateSourceTrigger=PropertyChanged}">
 
 
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Height="{Binding ElementName=comboBox, Path=ActualHeight}"
                                Width="{Binding ElementName=comboBox, Path=ActualWidth}"
                                Fill="{Binding Converter={StaticResource EnumToStringConverter}}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
 
-        </ComboBox>
-        <Label Grid.Row="2" Content="{localization:Loc Note_TitleLabel}"/>
-        <TextBox x:Name="titleTextBox" Grid.Row="3"
+            </ComboBox>
+            <Label Grid.Row="2" Content="{localization:Loc Note_TitleLabel}"/>
+            <TextBox x:Name="titleTextBox" Grid.Row="3"
                  Text="{Binding Note.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <Label Grid.Row="4" Content="{localization:Loc Note_ContentLabel}"/>
-        <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap"
+            <Label Grid.Row="4" Content="{localization:Loc Note_ContentLabel}"/>
+            <TextBox VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch" TextWrapping="Wrap"
                  SpellCheck.IsEnabled="True" Grid.Row="5"
                  Text="{Binding Note.Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
 
-        <Grid Grid.Row="6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Button Margin="5" IsDefault="True" Content="{localization:Loc Note_Save}" Command="{Binding AddNoteInformationCommand}"
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Margin="5" IsDefault="True" Content="{localization:Loc Note_Save}" Command="{Binding AddNoteInformationCommand}"
                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
-            <Button Margin="5" Grid.Column="1" IsCancel="True" Content="{localization:Loc Note_Cancel}" />
+                <Button Margin="5" Grid.Column="1" IsCancel="True" Content="{localization:Loc Note_Cancel}" />
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>

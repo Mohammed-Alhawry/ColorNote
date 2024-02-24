@@ -20,6 +20,16 @@ namespace ColorNote
             await _viewModel.LoadAsync();
         }
 
-        
+        private void Window_Deactivated(object sender, System.EventArgs e)
+        {
+            var window = sender as Window;
+            window.Opacity = 0.5;
+        }
+
+        private void Window_Activated(object sender, System.EventArgs e)
+        {
+            var window = sender as Window;
+            window.Opacity = 1;
+        }
     }
 }
