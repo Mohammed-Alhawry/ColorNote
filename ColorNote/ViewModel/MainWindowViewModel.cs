@@ -13,24 +13,20 @@ public class MainWindowViewModel : ViewModelBase
 {
     private ViewModelBase _selectedViewModel;
     
-
     public MainWindowViewModel(NotesViewModel notesViewModel, NavbarViewModel navbarViewModel)
-    {
-        
+    {    
         NotesViewModel = notesViewModel;
         NavbarViewModel = navbarViewModel;
         SelectedViewModel = notesViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel, CanClick);
         ClosingWindowCommand = new DelegateCommand(OnClosingWindow);
-        var hi = (App)Application.Current;
+        
     }
 
     public NavbarViewModel NavbarViewModel { get; }
     public NotesViewModel NotesViewModel { get; }
     public DelegateCommand SelectViewModelCommand { get; }
-
     public DelegateCommand ClosingWindowCommand { get; }
-    
     
 
     public ViewModelBase SelectedViewModel
@@ -40,8 +36,7 @@ public class MainWindowViewModel : ViewModelBase
         {
             _selectedViewModel = value;
             OnPropertyChanged();
-            SelectViewModelCommand?.RaiseCanExecuteChanged();
-            
+            SelectViewModelCommand?.RaiseCanExecuteChanged();        
         }
     }
 

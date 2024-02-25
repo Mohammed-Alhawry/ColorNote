@@ -16,9 +16,7 @@ namespace ColorNote.View
         
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            
-            
-            Thread.Sleep(250);
+            //Thread.Sleep(1000);
         }
     }
 }

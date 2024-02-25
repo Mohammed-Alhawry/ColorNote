@@ -8,6 +8,7 @@ using ColorNote.Data;
 using ColorNote.Windows;
 using ColorNote.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace ColorNote.ViewModel;
 
@@ -17,7 +18,7 @@ public class NotesViewModel : ViewModelBase
 
     private Note _selectedNote;
 
-    public ObservableCollection<Note> Notes { get; }
+    public ObservableCollection<Note> Notes { get; private set; }
     public Note SelectedNote
     {
         get => _selectedNote;
@@ -36,10 +37,7 @@ public class NotesViewModel : ViewModelBase
     public NotesViewModel(MainContext context)
     {
         _context = context;
-        _context.Database.EnsureCreated();
-        _context.Notes.Load();
-
-        Notes = _context.Notes.Local.ToObservableCollection();
+        
         EditNoteInformationCommand = new DelegateCommand(EditNoteInformation);
         AddNoteCommand = new DelegateCommand(AddNote);
         DeleteNoteCommand = new DelegateCommand(DeleteNote);
@@ -47,14 +45,20 @@ public class NotesViewModel : ViewModelBase
 
     public override async Task LoadAsync()
     {
-        await Task.CompletedTask;
+        await _context.Database.EnsureCreatedAsync();
+        await _context.Notes.LoadAsync();
+        
+        Notes = _context.Notes.Local.ToObservableCollection();
+        OnPropertyChanged(nameof(Notes));
     }
 
     private void AddNote(object parameter)
     {
-        var addNoteWindow = new AddNoteWindow(_context);
-        addNoteWindow.Owner = Application.Current.MainWindow;
-        
+        var addNoteWindow = new AddNoteWindow(_context)
+        {
+            Owner = Application.Current.MainWindow
+        };
+
         addNoteWindow.FlowDirection = addNoteWindow.Owner.FlowDirection;
         addNoteWindow.ShowDialog();
     }
