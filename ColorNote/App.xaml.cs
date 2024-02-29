@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Globalization;
+using System.IO;
 
 //using ColorNote.Properties;
 
@@ -30,9 +31,10 @@ namespace ColorNote
             services.AddTransient<MainWindowViewModel>();
             services.AddTransient<NotesViewModel>();
             services.AddTransient<NavbarViewModel>();
-
-            services.AddSingleton<MainContext>();
+            
+            services.AddDbContext<MainContext>();
         }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             try

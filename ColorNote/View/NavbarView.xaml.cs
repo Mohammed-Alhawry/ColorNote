@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace ColorNote.View
 {

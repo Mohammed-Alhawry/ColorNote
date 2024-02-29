@@ -20,7 +20,7 @@
         <DataTemplate x:Key="DeleteButtonTemplate">
             <Button Background="Red" Foreground="White"
                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DeleteNoteCommand}"
-                    CommandParameter="{Binding Id}">
+                    CommandParameter="{Binding}">
                 <materialDesign:PackIcon Kind="TrashCan"
                                          Width="25" Height="25" />
             </Button>
