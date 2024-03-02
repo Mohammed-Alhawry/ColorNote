@@ -1,6 +1,4 @@
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ColorNote.Command;
@@ -8,7 +6,6 @@ using ColorNote.Data;
 using ColorNote.Windows;
 using ColorNote.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
 
 namespace ColorNote.ViewModel;
 
@@ -17,6 +14,20 @@ public class NotesViewModel : ViewModelBase
     private readonly MainContext _context;
 
     private Note _selectedNote;
+
+
+    private bool _isNotesStillLoading;
+
+    public bool IsNotesStillLoading
+    {
+        get { return _isNotesStillLoading; }
+        set
+        {
+            _isNotesStillLoading = value;
+            OnPropertyChanged();
+        }
+    }
+
 
     public ObservableCollection<Note> Notes { get; private set; }
     public Note SelectedNote
@@ -37,7 +48,7 @@ public class NotesViewModel : ViewModelBase
     public NotesViewModel(MainContext context)
     {
         _context = context;
-        
+
         EditNoteInformationCommand = new DelegateCommand(EditNoteInformation);
         AddNoteCommand = new DelegateCommand(AddNote);
         DeleteNoteCommand = new DelegateCommand(DeleteNote);
@@ -45,21 +56,26 @@ public class NotesViewModel : ViewModelBase
 
     public override async Task LoadAsync()
     {
+        IsNotesStillLoading = true;
         await _context.Database.EnsureCreatedAsync();
         await _context.Notes.LoadAsync();
-        
+
         Notes = _context.Notes.Local.ToObservableCollection();
         OnPropertyChanged(nameof(Notes));
+        
+        IsNotesStillLoading = false;
     }
 
     private void AddNote(object parameter)
     {
+
         var addNoteWindow = new AddNoteWindow(_context)
         {
             Owner = Application.Current.MainWindow
         };
 
         addNoteWindow.FlowDirection = addNoteWindow.Owner.FlowDirection;
+
         addNoteWindow.ShowDialog();
     }
 

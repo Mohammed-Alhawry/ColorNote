@@ -26,7 +26,7 @@
             </Button>
         </DataTemplate>
 
-        
+
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -44,7 +44,7 @@
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource GeneralDataGridRowStyle}">
                     <Setter Property="Background"
-                            Value="{Binding BackgroundColor, Converter={StaticResource EnumToStringConverter}}" />            
+                            Value="{Binding BackgroundColor, Converter={StaticResource EnumToStringConverter}}" />
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
@@ -57,7 +57,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-
+        <ProgressBar Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignCircularProgressBar}" Value="0" IsIndeterminate="True" Visibility="{Binding IsNotesStillLoading, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BooleanToVisibilityConverter}}" />
         <Viewbox Width="120" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
             <Button HorizontalAlignment="Center" FontWeight="Bold"
                     Command="{Binding AddNoteCommand}"
