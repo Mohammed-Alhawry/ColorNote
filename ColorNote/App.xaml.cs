@@ -6,8 +6,9 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Globalization;
 using System.IO;
+using ColorNote.View;
 
-//using ColorNote.Properties;
+
 
 namespace ColorNote
 {
@@ -49,6 +50,7 @@ namespace ColorNote
 
 
                 var mainWindow = _serviceProvider.GetService<MainWindow>();
+
                 mainWindow?.Show();
             }
             catch

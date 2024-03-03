@@ -15,6 +15,7 @@
     </PropertyGroup>
     
     <ItemGroup>
+        <None Remove="Images\ColorNote.png" />
         <None Remove="Images\Icons\notepad_12098670.png" />
         <None Remove="Images\Icons\note_4371099.png" />
         <None Remove="Images\Icons\office-supplies_2891512.png" />
@@ -87,6 +88,7 @@
 
     <ItemGroup>
         <None Remove="Images\Icons\notepad_25496.ico" />
+        <Resource Include="Images\ColorNote.png" />
         <Resource Include="Images\Icons\notepad_25496.ico" />
     </ItemGroup>
 
