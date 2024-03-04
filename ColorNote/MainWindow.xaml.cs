@@ -7,13 +7,22 @@ namespace ColorNote
     public partial class MainWindow : Window
     {
         private MainWindowViewModel _viewModel;
-        
+
         public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
             _viewModel = viewModel;
             DataContext = _viewModel;
             Loaded += OnLoaded;
+            loginView.IsVisibleChanged += OnLoginViewVisibilityChanged;
+        }
+
+        private void OnLoginViewVisibilityChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (loginView.Visibility == Visibility.Collapsed)
+                mainApplicationView.Visibility = Visibility.Visible;
+            else
+                mainApplicationView.Visibility = Visibility.Collapsed;
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)

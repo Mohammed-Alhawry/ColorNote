@@ -1,28 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace ColorNote.View
+namespace ColorNote.View;
+
+/// <summary>
+/// Interaction logic for LoginView.xaml
+/// </summary>
+public partial class LoginView : UserControl
 {
-    /// <summary>
-    /// Interaction logic for LoginView.xaml
-    /// </summary>
-    public partial class LoginView : UserControl
+    public LoginView()
     {
-        public LoginView()
+        InitializeComponent();
+    }
+
+    private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+    {
+        var areBothCorrect = true;
+        if (userNameBox.Text != "")
         {
-            InitializeComponent();
+            userNameErrorNotifierBox.Visibility = System.Windows.Visibility.Visible;
+            areBothCorrect = false;
         }
+        else
+            userNameErrorNotifierBox.Visibility = System.Windows.Visibility.Collapsed;
+
+        if (passwordBox.Password != "")
+        {
+            passwordErrorNotifierBox.Visibility = System.Windows.Visibility.Visible;
+            areBothCorrect = false;
+        }
+        else
+            passwordErrorNotifierBox.Visibility = System.Windows.Visibility.Collapsed;
+
+        if (areBothCorrect)
+        {
+            this.Visibility = System.Windows.Visibility.Collapsed;
+            
+        }
+
     }
 }

@@ -29,6 +29,7 @@
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding ClosingWindowCommand}" />
         </i:EventTrigger>
+
     </i:Interaction.Triggers>
 
     <Window.Resources>
@@ -37,41 +38,39 @@
         </DataTemplate>
 
     </Window.Resources>
-    <ScrollViewer>
 
-        <Grid>
-            <view:LoginView />
-            <Grid Visibility="Collapsed">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
+    <Grid>
+        <view:LoginView x:Name="loginView"/>
+        <Grid x:Name="mainApplicationView">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-                <view:NavbarView DataContext="{Binding NavbarViewModel}" />
+            <view:NavbarView DataContext="{Binding NavbarViewModel}" />
 
-                <TextBlock Grid.Row="1"
-                           HorizontalAlignment="Center"
+            <TextBlock Grid.Row="1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Comic Sans MS"
+                       FontStyle="Italic"
+                       Style="{StaticResource MaterialDesignHeadline3TextBlock}"
+                       Text="{localization:Loc NotesTitle}" />
+
+            <ContentControl Grid.Row="2"
+                            Content="{Binding SelectedViewModel}" />
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="3">
+                <TextBlock Margin="0 5"
+                           VerticalAlignment="Center">(c)</TextBlock>
+                <TextBlock Margin="5 0"
                            VerticalAlignment="Center"
-                           FontFamily="Comic Sans MS"
-                           FontStyle="Italic"
-                           Style="{StaticResource MaterialDesignHeadline3TextBlock}"
-                           Text="{localization:Loc NotesTitle}" />
+                           Text="{localization:Loc Main_StatusBar_Copyright}" />
+            </StackPanel>
 
-                <ContentControl Grid.Row="2"
-                                Content="{Binding SelectedViewModel}" />
-
-                <StackPanel Orientation="Horizontal"
-                            Grid.Row="3">
-                    <TextBlock Margin="0 5"
-                               VerticalAlignment="Center">(c)</TextBlock>
-                    <TextBlock Margin="5 0"
-                               VerticalAlignment="Center"
-                               Text="{localization:Loc Main_StatusBar_Copyright}" />
-                </StackPanel>
-
-            </Grid>
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </Window>

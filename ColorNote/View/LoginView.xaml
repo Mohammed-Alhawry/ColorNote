@@ -5,71 +5,88 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:ColorNote.View"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
-    <Grid>
+    <ScrollViewer>
+        <Grid>
+            <Grid HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="20" />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.ColumnSpan="2">
+                    <Image Source="/Images/ColorNote.png"
+                           Width="200"
+                           Height="200">
+                        <Image.RenderTransform>
+                            <RotateTransform Angle="6"
+                                             CenterX="0.5"
+                                             CenterY="0.5" />
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock Padding="0 3 0 0"
+                               Margin="0 20 0 0"
+                               Text="User Name" />
+                </StackPanel>
+                <Canvas Grid.Row="1">
+                    <materialDesign:PackIcon Canvas.Left="-2"
+                                             Canvas.Top="5"
+                                             Kind="User"
+                                             Width="20"
+                                             Height="20" />
+                </Canvas>
+                <StackPanel Grid.Row="1"
+                            Grid.ColumnSpan="2">
 
-        <Grid HorizontalAlignment="Center"
-              VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition />
-                <RowDefinition Height="20" />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.ColumnSpan="2">
-                <Image Source="/Images/ColorNote.png"
-                       Width="200"
-                       Height="200">
-                    <Image.RenderTransform>
-                        <RotateTransform Angle="6"
-                                         CenterX="0.5"
-                                         CenterY="0.5" />
-                    </Image.RenderTransform>
-                </Image>
-                <TextBlock Padding="0 3 0 0"
-                           Margin="0 20 0 0"
-                           Text="User Name" />
-            </StackPanel>
-            <Canvas Grid.Row="1">
-                <materialDesign:PackIcon Canvas.Left="-2"
-                                         Canvas.Top="5"
-                                         Kind="User"
-                                         Width="20"
-                                         Height="20" />
-            </Canvas>
-            <TextBox Grid.Row="1"
-                     Grid.ColumnSpan="2"
-                     Padding="17 5"
-                     Width="300"
-                     TextWrapping="Wrap" />
+                    <TextBox Padding="17 5"
+                             Width="300"
+                             x:Name="userNameBox"
+                             TextWrapping="Wrap" />
+                    <TextBlock Visibility="Collapsed"
+                               Text="User name is incorrect"
+                               x:Name="userNameErrorNotifierBox"
+                               FontWeight="Light"
+                               Foreground="Red" />
+                </StackPanel>
+                <TextBlock Grid.Row="3"
+                           Grid.ColumnSpan="2"
+                           Padding="0 3 0 0"
+                           Text="Password" />
+                <Canvas Grid.Row="4">
+                    <materialDesign:PackIcon Canvas.Left="-2"
+                                             Canvas.Top="5"
+                                             Kind="Password"
+                                             Width="20"
+                                             Height="20" />
+                </Canvas>
+                <StackPanel  Grid.Row="5"
+                             Grid.ColumnSpan="2">
 
-            <TextBlock Grid.Row="3"
-                       Grid.ColumnSpan="2"
-                       Padding="0 3 0 0"
-                       Text="Password" />
-            <Canvas Grid.Row="4">
-                <materialDesign:PackIcon Canvas.Left="-2"
-                                         Canvas.Top="5"
-                                         Kind="Password"
-                                         Width="20"
-                                         Height="20" />
-            </Canvas>
-            <StackPanel  Grid.Row="5"
-                         Grid.ColumnSpan="2">
+                    <PasswordBox Padding="17 5"
+                                 Width="300"
+                                 x:Name="passwordBox" />
+                    <TextBlock Visibility="Collapsed"
+                               x:Name="passwordErrorNotifierBox"
+                               Text="Password is incorrect"
+                               FontWeight="Light"
+                               Foreground="Red" />
+                    <Button Content="Log In"
+                            Margin="0 10"
+                            Click="Button_Click"
+                            IsDefault="True" />
+                </StackPanel>
 
-                <PasswordBox Padding="17 5"
-                             Width="300" />
-                <Button Content="Log In"
-                        Margin="0 10" />
-            </StackPanel>
-
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

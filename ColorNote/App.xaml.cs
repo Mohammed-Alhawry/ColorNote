@@ -33,6 +33,7 @@ namespace ColorNote
             services.AddTransient<NotesViewModel>();
             services.AddTransient<NavbarViewModel>();
             
+            
             services.AddDbContext<MainContext>();
         }
 
